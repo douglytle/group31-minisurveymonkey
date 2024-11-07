@@ -11,7 +11,7 @@ public class Survey {
     List<Question> questions;
 
     public Survey() {
-        questions = new ArrayList<Question>();
+        questions = new ArrayList<>();
     }
 
     public void addQuestion(Question question) {
