@@ -3,12 +3,14 @@ package group.thirtyone.surveycomponents;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OpenEnded extends Question {
+public class OpenEnded implements Question {
 
     private String question;
     private List<String> answers;
 
-    public OpenEnded() {}
+    public OpenEnded() {
+        answers = new ArrayList<String>();
+    }
 
     public OpenEnded(String question) {
         this.question = question;
@@ -21,6 +23,11 @@ public class OpenEnded extends Question {
 
     public void addAnswer (String answer) {
         answers.add(answer);
+    }
+
+    @Override
+    public String getType() {
+        return "OE";
     }
 
     public String getQuestion() { return question; }

@@ -18,5 +18,7 @@ public class Survey {
         questions.add(question);
     }
 
-
+    public List<Question> getQuestions() {
+        return questions;
+    }
 }
