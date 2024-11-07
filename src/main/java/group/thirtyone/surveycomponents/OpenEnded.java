@@ -9,12 +9,12 @@ public class OpenEnded implements Question {
     private List<String> answers;
 
     public OpenEnded() {
-        answers = new ArrayList<String>();
+        answers = new ArrayList<>();
     }
 
     public OpenEnded(String question) {
         this.question = question;
-        answers = new ArrayList<String>();
+        answers = new ArrayList<>();
     }
 
     public void setQuestion(String question) {
