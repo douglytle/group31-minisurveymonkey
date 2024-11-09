@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import org.aspectj.apache.bcel.classfile.Module;
 
 @Entity
 public class Survey {
@@ -13,6 +12,10 @@ public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+
+
+    private String name;
 
     @OneToMany(mappedBy = "id")
     private List<MultipleChoice> multipleChoiceQuestions;
@@ -49,5 +52,13 @@ public class Survey {
 
     public Long getId() {
         return this.id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

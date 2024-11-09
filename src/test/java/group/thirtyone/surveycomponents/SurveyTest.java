@@ -24,4 +24,11 @@ class SurveyTest {
         assertEquals("NR", survey.getQuestions().get(1).getType());
         assertEquals("OE", survey.getQuestions().get(2).getType());
     }
+
+    @Test
+    void testName() {
+        Survey survey = new Survey();
+        survey.setName("test");
+        assertEquals(survey.getName(), "test");
+    }
 }
