@@ -46,4 +46,8 @@ public class Survey {
         questions.addAll(openEndedQuestions);
         return questions;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }

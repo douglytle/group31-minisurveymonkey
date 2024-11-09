@@ -72,4 +72,8 @@ public class MultipleChoice implements Question {
     public void setOrderOnPage(int orderOnPage) {
         this.orderOnPage = orderOnPage;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }
