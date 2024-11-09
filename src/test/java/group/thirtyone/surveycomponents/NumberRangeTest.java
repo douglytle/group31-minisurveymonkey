@@ -41,4 +41,10 @@ class NumberRangeTest {
         assertEquals("3", numberRange.getAnswers().get(0));
         assertEquals("2", numberRange.getAnswers().get(1));
     }
+
+    @Test
+    void setOrderOnPage(){
+        numberRange.setOrderOnPage(1);
+        assertEquals(numberRange.getOrderOnPage(), 1);
+    }
 }
