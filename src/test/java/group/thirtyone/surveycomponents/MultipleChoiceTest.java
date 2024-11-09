@@ -56,4 +56,10 @@ class MultipleChoiceTest {
         assertTrue(mc.getChoices().contains("B"));
         assertEquals(2, mc.getChoices().size());
     }
+
+    @Test
+    void setOrderOnPage(){
+        mc.setOrderOnPage(1);
+        assertEquals(mc.getOrderOnPage(), 1);
+    }
 }

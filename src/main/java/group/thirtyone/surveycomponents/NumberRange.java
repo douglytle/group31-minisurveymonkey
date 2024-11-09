@@ -2,12 +2,20 @@ package group.thirtyone.surveycomponents;
 
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.*;
 
+@Entity
 public class NumberRange implements Question {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private int min;
     private int max;
+    @ElementCollection
     private List<String> chosen;
     private String question;
+    private int orderOnPage;
 
     public NumberRange() {
         chosen = new ArrayList<>();
@@ -55,5 +63,13 @@ public class NumberRange implements Question {
     @Override
     public String getType() {
         return "NR";
+    }
+
+    public int getOrderOnPage() {
+        return orderOnPage;
+    }
+
+    public void setOrderOnPage(int orderOnPage) {
+        this.orderOnPage = orderOnPage;
     }
 }

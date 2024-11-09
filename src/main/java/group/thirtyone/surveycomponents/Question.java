@@ -1,6 +1,7 @@
 package group.thirtyone.surveycomponents;
 
 import java.util.List;
+import jakarta.persistence.*;
 
 public interface Question {
 

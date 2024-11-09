@@ -28,4 +28,10 @@ class OpenEndedTest {
         assertEquals("This is an answer", openEnded.getAnswers().get(0));
         assertEquals("This is another answer", openEnded.getAnswers().get(1));
     }
+
+    @Test
+    void setOrderOnPage(){
+        openEnded.setOrderOnPage(1);
+        assertEquals(openEnded.getOrderOnPage(), 1);
+    }
 }
