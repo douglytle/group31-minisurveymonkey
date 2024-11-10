@@ -5,38 +5,73 @@
     <title>Create Survey</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/createSurvey.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $( ".addMCQuestion" ).click(function(){
+                var $clone = $( "ul.MCList" ).first().clone();
+                $clone.append( "<button type='button' class='remove-row'>-</button>" );
+                $clone.insertBefore( ".addMCQuestion" );
+                console.log("added MC question");
+            });
+
+            $( ".addNRQuestion" ).click(function(){
+                var $clone = $( "ul.NRList" ).first().clone();
+                $clone.append( "<button type='button' class='remove-row'>-</button>" );
+                $clone.insertBefore( ".addNRQuestion" );
+                console.log("added NR question");
+            });
+
+            $( ".addOEQuestion" ).click(function(){
+                var $clone = $( "ul.OEList" ).first().clone();
+                $clone.append( "<button type='button' class='remove-row'>-</button>" );
+                $clone.insertBefore( ".addOEQuestion" );
+                console.log("added OE question");
+            });
+
+            $( ".createSurvey" ).on("click", ".remove-row", function(){
+                $(this).parent().remove();
+            });
+
+        });
+    </script>
 </head>
 <body>
 <h1>Create Survey</h1>
-<p>Choose a question: </p>
 
-<select name="questionType" id="questionType">
-    <option value="multipleChoice">Multiple Choice</option>
-    <option value="numberRange">Number Range</option>
-    <option value="openEnded">Open Ended</option>
-</select><br>
+<form class="createSurvey" action="">
+        <p>Multiple Choice Questions:</p>
+        <ul th:each="MCQuestion: ${MCQuestions}" class="MCList" id="MCList">
+            <li>
+                <div class="multipleChoice" id="multipleChoice">
+                    <label>Question text 1: </label>
+                    <input type="text" th:name="|MCQuestion.question|" th:value="${MCQuestion.getQuestion()}">
+                </div>
+            </li>
+        </ul>
+    <button type="button" class="addMCQuestion" id="addMCQuestion">+</button>
 
-<div class="numberRange" id="numberRange">
-    <label>Question text 1: </label>
-    <input type="text">
-</div>
+    <p>Number Range Questions:</p>
+    <ul th:each="NRQuestion: ${NRQuestions}" class="NRList" id="NRList">
+        <li>
+            <div class="numberRange" id="numberRange">
+                <label>Question text 2: </label>
+                <input type="text" th:name="|NRQuestion.question|" th:value="${NRQuestion.getQuestion()}">
+            </div>
+        </li>
+    </ul>
+    <button type="button" class="addNRQuestion" id="addNRQuestion">+</button>
 
-<div class="multipleChoice" id="multipleChoice">
-    <label>Question text 2: </label>
-    <input type="text">
-</div>
+    <p>Open Ended Questions:</p>
+    <ul th:each="OEQuestion: ${OEQuestions}" class="OEList" id="OEList">
+        <li>
+            <div class="openEnded" id="openEnded">
+                <label>Question text 3: </label>
+                <input type="text" th:name="|OEQuestion.question|" th:value="${OEQuestion.getQuestion()}">
+            </div>
+        </li>
+    </ul>
+    <button type="button" class="addOEQuestion" id="addOEQuestion">+</button>
 
-<div class="openEnded" id="openEnded">
-    <label>Question text 3: </label>
-    <input type="text">
-</div>
-
-<form class="createSurvey" action="" th:object="${survey}">
-    <div class="createQuestion">
-
-    </div>
-
-    <!--<button type="button" class="addQuestion">+</button>-->
 </form>
 </body>
 </html>
