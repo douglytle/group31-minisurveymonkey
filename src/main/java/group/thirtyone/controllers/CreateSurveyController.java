@@ -46,14 +46,9 @@ public class CreateSurveyController {
         System.out.println("Create Survey Submitted");
         surveyRepository.save(survey);
         System.out.println("Survey Saved");
-        for(MultipleChoice MCQuestion : survey.getMultipleChoiceQuestions()) {
-            System.out.println("Multiple Choice Question: " + MCQuestion.getQuestion());
-        }
-        for (OpenEnded openEnded : survey.getOpenEndedQuestions()) {
-            System.out.println("Open Ended Question: " + openEnded.getQuestion());
-        }
-        for (NumberRange numberRange : survey.getNumberRangeQuestions()) {
-            System.out.println("Number Range: " + numberRange.getQuestion());
+
+        for(Question question : survey.getQuestions()) {
+            System.out.println(question);
         }
 
         List<Survey> surveyList = new ArrayList<>();
