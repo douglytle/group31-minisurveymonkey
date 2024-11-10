@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Survey</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/createSurvey.js"></script>
 </head>
 <body>
-<p>This is the survey creation page</p>
+<h1>Create Survey</h1>
+<p>Choose a question: </p>
+
+<select name="questionType" id="questionType">
+    <option value="multipleChoice">Multiple Choice</option>
+    <option value="numberRange">Number Range</option>
+    <option value="openEnded">Open Ended</option>
+</select><br>
+
+<div class="numberRange" id="numberRange">
+    <label>Question text 1: </label>
+    <input type="text">
+</div>
+
+<div class="multipleChoice" id="multipleChoice">
+    <label>Question text 2: </label>
+    <input type="text">
+</div>
+
+<div class="openEnded" id="openEnded">
+    <label>Question text 3: </label>
+    <input type="text">
+</div>
+
+<form class="createSurvey" action="" th:object="${survey}">
+    <div class="createQuestion">
+
+    </div>
+
+    <!--<button type="button" class="addQuestion">+</button>-->
+</form>
 </body>
 </html>
