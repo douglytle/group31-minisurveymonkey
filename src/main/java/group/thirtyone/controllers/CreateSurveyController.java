@@ -1,9 +1,13 @@
 package group.thirtyone.controllers;
 
+import group.thirtyone.persistencerepositories.SurveyRepository;
 import group.thirtyone.surveycomponents.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +15,53 @@ import java.util.List;
 @Controller
 public class CreateSurveyController {
 
+    private final SurveyRepository surveyRepository;
+
+    public CreateSurveyController(SurveyRepository surveyRepository) {
+        this.surveyRepository = surveyRepository;
+    }
+
     @GetMapping("/create")
     public String createSurvey(Model model) {
-        List<MultipleChoice> MCQuestions = new ArrayList<>();
-        MCQuestions.add(new MultipleChoice());
-        List<NumberRange> NRQuestions = new ArrayList<>();
-        NRQuestions.add(new NumberRange());
-        List<OpenEnded> OEQuestions = new ArrayList<>();
-        OEQuestions.add(new OpenEnded());
-        model.addAttribute("MCQuestions", MCQuestions);
-        model.addAttribute("NRQuestions", NRQuestions);
-        model.addAttribute("OEQuestions", OEQuestions);
+        Survey survey = new Survey();
+
+        MultipleChoice multipleChoice = new MultipleChoice();
+        multipleChoice.setQuestion("");
+        survey.addQuestion(multipleChoice);
+
+        OpenEnded openEnded = new OpenEnded();
+        openEnded.setQuestion("");
+        survey.addQuestion(openEnded);
+
+        NumberRange numberRange = new NumberRange();
+        numberRange.setQuestion("");
+        survey.addQuestion(numberRange);
+
+        model.addAttribute("survey", survey);
         return "create";
+    }
+
+    @PostMapping("/create")
+    public String createSurveySubmit(@ModelAttribute Survey survey, Model model) {
+        System.out.println("Create Survey Submitted");
+        surveyRepository.save(survey);
+        System.out.println("Survey Saved");
+        for(MultipleChoice MCQuestion : survey.getMultipleChoiceQuestions()) {
+            System.out.println("Multiple Choice Question: " + MCQuestion.getQuestion());
+        }
+        for (OpenEnded openEnded : survey.getOpenEndedQuestions()) {
+            System.out.println("Open Ended Question: " + openEnded.getQuestion());
+        }
+        for (NumberRange numberRange : survey.getNumberRangeQuestions()) {
+            System.out.println("Number Range: " + numberRange.getQuestion());
+        }
+
+        List<Survey> surveyList = new ArrayList<>();
+        Iterable<Survey> surveys = surveyRepository.findAll();
+        for (Survey s : surveys) {
+            surveyList.add(s);
+        }
+        model.addAttribute("surveys", surveyList);
+        return "home";
     }
 }

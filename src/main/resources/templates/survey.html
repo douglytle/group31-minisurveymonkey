@@ -12,5 +12,18 @@
 <p th:text="${survey.id}"></p>
 <p>Survey name:</p>
 <p th:text="${survey.name}"></p>
+
+<table>
+    <tr class="MCList" th:each="MCQuestion:${survey.multipleChoiceQuestions}">
+        <td class="MCQuestion" th:text="|${MCQuestion.getQuestion()}|"></td>
+    </tr>
+    <tr class="NRList" th:each="NRQuestion:${survey.numberRangeQuestions}">
+        <td class="NRQuestion" th:text="|${NRQuestion.getQuestion()}|"></td>
+    </tr>
+    <tr class="OEList" th:each="OEQuestion:${survey.openEndedQuestions}">
+        <td class="OEQuestion" th:text="|${OEQuestion.getQuestion()}|"></td>
+    </tr>
+</table>
+
 </body>
 </html>

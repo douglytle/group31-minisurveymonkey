@@ -12,6 +12,7 @@
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addMCQuestion" );
                 console.log("added MC question");
+                questionCount++;
             });
 
             $( ".addNRQuestion" ).click(function(){
@@ -19,6 +20,7 @@
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addNRQuestion" );
                 console.log("added NR question");
+                questionCount++;
             });
 
             $( ".addOEQuestion" ).click(function(){
@@ -26,52 +28,58 @@
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addOEQuestion" );
                 console.log("added OE question");
+                questionCount++;
             });
 
             $( ".createSurvey" ).on("click", ".remove-row", function(){
                 $(this).parent().remove();
+                questionCount--;
             });
-
         });
     </script>
 </head>
 <body>
 <h1>Create Survey</h1>
 
-<form class="createSurvey" action="">
+<form class="createSurvey" th:object="${survey}" action="/create" method="post">
+        <p>Survey Name: <input type="text" th:field="*{name}" /> </p>
+
         <p>Multiple Choice Questions:</p>
-        <ul th:each="MCQuestion: ${MCQuestions}" class="MCList" id="MCList">
+        <ul th:each="MCQuestion: *{multipleChoiceQuestions}" class="MCList" id="MCList">
             <li>
                 <div class="multipleChoice" id="multipleChoice">
                     <label>Question text 1: </label>
                     <input type="text" th:name="|MCQuestion.question|" th:value="${MCQuestion.getQuestion()}">
+                    <label>Order on page: WIP</label>
                 </div>
             </li>
         </ul>
     <button type="button" class="addMCQuestion" id="addMCQuestion">+</button>
 
     <p>Number Range Questions:</p>
-    <ul th:each="NRQuestion: ${NRQuestions}" class="NRList" id="NRList">
+    <ul th:each="NRQuestion: *{numberRangeQuestions}" class="NRList" id="NRList">
         <li>
             <div class="numberRange" id="numberRange">
                 <label>Question text 2: </label>
                 <input type="text" th:name="|NRQuestion.question|" th:value="${NRQuestion.getQuestion()}">
+                <label>Order on page: WIP</label>
             </div>
         </li>
     </ul>
     <button type="button" class="addNRQuestion" id="addNRQuestion">+</button>
 
     <p>Open Ended Questions:</p>
-    <ul th:each="OEQuestion: ${OEQuestions}" class="OEList" id="OEList">
+    <ul th:each="OEQuestion: *{openEndedQuestions}" class="OEList" id="OEList">
         <li>
             <div class="openEnded" id="openEnded">
                 <label>Question text 3: </label>
                 <input type="text" th:name="|OEQuestion.question|" th:value="${OEQuestion.getQuestion()}">
+                <label>Order on page: WIP</label>
             </div>
         </li>
     </ul>
     <button type="button" class="addOEQuestion" id="addOEQuestion">+</button>
-
+    <p><input type="submit" value="Submit" /></p>
 </form>
 </body>
 </html>

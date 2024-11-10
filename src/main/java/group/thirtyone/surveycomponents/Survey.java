@@ -61,4 +61,28 @@ public class Survey {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<MultipleChoice> getMultipleChoiceQuestions() {
+        return multipleChoiceQuestions;
+    }
+
+    public void setMultipleChoiceQuestions(List<MultipleChoice> multipleChoiceQuestions) {
+        this.multipleChoiceQuestions = multipleChoiceQuestions;
+    }
+
+    public List<NumberRange> getNumberRangeQuestions() {
+        return numberRangeQuestions;
+    }
+
+    public void setNumberRangeQuestions(List<NumberRange> numberRangeQuestions) {
+        this.numberRangeQuestions = numberRangeQuestions;
+    }
+
+    public List<OpenEnded> getOpenEndedQuestions() {
+        return openEndedQuestions;
+    }
+
+    public void setOpenEndedQuestions(List<OpenEnded> openEndedQuestions) {
+        this.openEndedQuestions = openEndedQuestions;
+    }
 }
