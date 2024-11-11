@@ -21,8 +21,8 @@ class SurveyTest {
         assertTrue(survey.getQuestions().contains(openEnded));
         assertTrue(survey.getQuestions().contains(numberRange));
         assertEquals("MCQ", survey.getQuestions().get(0).getType());
-        assertEquals("NR", survey.getQuestions().get(1).getType());
-        assertEquals("OE", survey.getQuestions().get(2).getType());
+        assertEquals("OE", survey.getQuestions().get(1).getType());
+        assertEquals("NR", survey.getQuestions().get(2).getType());
     }
 
     @Test
@@ -30,5 +30,15 @@ class SurveyTest {
         Survey survey = new Survey();
         survey.setName("test");
         assertEquals(survey.getName(), "test");
+    }
+
+    @Test
+    void testNumber()
+    {
+        Survey survey = new Survey();
+        survey.addQuestion(new MultipleChoice());
+        survey.addQuestion(new NumberRange());
+
+        assertEquals(2, survey.getNumberOfQuestions());
     }
 }

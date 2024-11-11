@@ -10,5 +10,9 @@ public interface Question {
     List<String> getAnswers();
     void addAnswer(String answer);
     String getType();
-
+    void setOrderOnPage(int orderOnPage);
+    int getOrderOnPage();
+    List<String> getChoices();
+    int getMin();
+    int getMax();
 }

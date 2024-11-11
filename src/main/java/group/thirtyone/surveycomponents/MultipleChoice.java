@@ -57,6 +57,16 @@ public class MultipleChoice implements Question {
         return choices;
     }
 
+    @Override
+    public int getMin() {
+        return 0;
+    }
+
+    @Override
+    public int getMax() {
+        return 0;
+    }
+
     public void setChoices(List<String> choices) {
         this.choices = choices;
     }
