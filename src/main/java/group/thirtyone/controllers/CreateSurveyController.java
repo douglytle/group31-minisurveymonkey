@@ -27,6 +27,8 @@ public class CreateSurveyController {
 
         MultipleChoice multipleChoice = new MultipleChoice();
         multipleChoice.setQuestion("");
+        multipleChoice.addChoice("");
+        multipleChoice.addChoice("");
         survey.addQuestion(multipleChoice);
 
         OpenEnded openEnded = new OpenEnded();

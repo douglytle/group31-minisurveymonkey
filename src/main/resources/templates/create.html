@@ -6,6 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/createSurvey.js"></script>
     <script type="text/javascript">
+        var questionCount = 3;
+
         $(document).ready(function(){
             $( ".addMCQuestion" ).click(function(){
                 var $clone = $( "ul.MCList" ).first().clone();
@@ -18,7 +20,6 @@
             $( ".addNRQuestion" ).click(function(){
                 var $clone = $( "ul.NRList" ).first().clone();
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
-                $clone.insertBefore( ".addNRQuestion" );
                 console.log("added NR question");
                 questionCount++;
             });
@@ -31,9 +32,20 @@
                 questionCount++;
             });
 
+            $( ".addChoice" ).click(function(){
+                var $clone = $( "li.choice" ).first().clone();
+                $clone.append( "<button type='button' class='removeChoice'>-</button>" );
+                $clone.insertBefore( ".addChoice" );
+                console.log("added MC choice");
+            });
+
             $( ".createSurvey" ).on("click", ".remove-row", function(){
                 $(this).parent().remove();
                 questionCount--;
+            });
+
+            $( ".multipleChoice" ).on("click", ".removeChoice", function(){
+                $(this).parent().remove();
             });
         });
     </script>
@@ -49,7 +61,22 @@
             <li>
                 <div class="multipleChoice" id="multipleChoice">
                     <label>Question text 1: </label>
-                    <input type="text" th:name="|MCQuestion.question|" th:value="${MCQuestion.getQuestion()}">
+                    <input type="text" th:value="${MCQuestion.getQuestion()}"><br>
+                    <p>List the choices (please note the first two are mandatory, they have been marked for your convenience):</p>
+                    <ul>
+                        <li class="choice">
+                            <label>Choice: </label>
+                            <input type="text" th:value="${MCQuestion.getChoices().getFirst()}">
+                        </li>
+
+                        <li>
+                            <label>Choice: </label>
+                            <input type="text" th:value="${MCQuestion.getChoices().get(1)}"><br>
+                        </li>
+                    </ul>
+
+                    <button type="button" class="addChoice" id="addChoice">+</button>
+
                     <label>Order on page: WIP</label>
                 </div>
             </li>
@@ -61,7 +88,11 @@
         <li>
             <div class="numberRange" id="numberRange">
                 <label>Question text 2: </label>
-                <input type="text" th:name="|NRQuestion.question|" th:value="${NRQuestion.getQuestion()}">
+                <input type="text" th:value="|${NRQuestion.getQuestion()}|"><br>
+                <label>Minimum value: </label>
+                <input type="text" th:value="|${NRQuestion.getMin()}|"><br>
+                <label>Maximum value: </label>
+                <input type="text" th:value="|${NRQuestion.getMax()}|"><br>
                 <label>Order on page: WIP</label>
             </div>
         </li>
@@ -73,7 +104,7 @@
         <li>
             <div class="openEnded" id="openEnded">
                 <label>Question text 3: </label>
-                <input type="text" th:name="|OEQuestion.question|" th:value="${OEQuestion.getQuestion()}">
+                <input type="text" th:name="|OEQuestion.question|" th:text="|${OEQuestion.question}|"><br>
                 <label>Order on page: WIP</label>
             </div>
         </li>
