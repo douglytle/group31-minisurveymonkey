@@ -1,7 +1,6 @@
 package group.thirtyone.surveycomponents;
 
 import java.util.List;
-import jakarta.persistence.*;
 
 /**
  * Interface representing a question on a survey page. Provides a set of methods to help with survey creation.
@@ -19,4 +18,5 @@ public interface Question {
     List<String> getChoices();
     int getMin();
     int getMax();
+    Long getId();
 }
