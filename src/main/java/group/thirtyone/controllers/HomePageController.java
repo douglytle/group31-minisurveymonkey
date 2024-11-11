@@ -1,6 +1,7 @@
 package group.thirtyone.controllers;
 
 import group.thirtyone.persistencerepositories.SurveyRepository;
+import group.thirtyone.surveycomponents.Question;
 import group.thirtyone.surveycomponents.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,7 @@ public class HomePageController {
         if (result.isPresent()) {
             Survey survey = result.get();
             model.addAttribute("survey", survey);
+
             return "survey";
         }
         return "error";
