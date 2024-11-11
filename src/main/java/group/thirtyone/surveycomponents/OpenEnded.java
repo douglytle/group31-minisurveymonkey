@@ -45,6 +45,21 @@ public class OpenEnded implements Question {
         return orderOnPage;
     }
 
+    @Override
+    public List<String> getChoices() {
+        return null;
+    }
+
+    @Override
+    public int getMin() {
+        return 0;
+    }
+
+    @Override
+    public int getMax() {
+        return 0;
+    }
+
     public void setOrderOnPage(int orderOnPage) {
         this.orderOnPage = orderOnPage;
     }

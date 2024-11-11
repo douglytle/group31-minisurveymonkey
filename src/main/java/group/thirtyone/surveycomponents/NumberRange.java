@@ -69,6 +69,11 @@ public class NumberRange implements Question {
         return orderOnPage;
     }
 
+    @Override
+    public List<String> getChoices() {
+        return null;
+    }
+
     public void setOrderOnPage(int orderOnPage) {
         this.orderOnPage = orderOnPage;
     }

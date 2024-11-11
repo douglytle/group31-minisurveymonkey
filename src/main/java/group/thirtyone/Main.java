@@ -1,6 +1,9 @@
 package group.thirtyone;
 
 import group.thirtyone.persistencerepositories.SurveyRepository;
+import group.thirtyone.surveycomponents.MultipleChoice;
+import group.thirtyone.surveycomponents.NumberRange;
+import group.thirtyone.surveycomponents.OpenEnded;
 import group.thirtyone.surveycomponents.Survey;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class Main {
@@ -22,12 +25,6 @@ public class Main {
         return args -> {
 
             System.out.println("Start Spring Boot!");
-
-            String[] beanNames = ctx.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
-                System.out.println(beanName);
-            }
 
         };
     }
@@ -51,12 +48,23 @@ public class Main {
             Survey survey5 = new Survey();
             survey5.setName("Sample survey title 5");
 
+            ArrayList<String> choices = new ArrayList<>();
+            choices.add("Choice 1");
+            choices.add("Choice 2");
+            choices.add("Choice 3");
+
+            survey1.setName("Sample Survey");
+            survey1.addQuestion(new MultipleChoice(choices, "Choose a choice"));
+            survey1.addQuestion(new MultipleChoice(choices, "Choose a choice again"));
+            survey1.addQuestion(new OpenEnded("What is this question??"));
+            survey1.addQuestion(new NumberRange("Pick a number", 2, 20));
+            survey1.addQuestion(new NumberRange("Pick a numbers", 10, 50));
+
             surveyRepository.save(survey1);
             surveyRepository.save(survey2);
             surveyRepository.save(survey3);
             surveyRepository.save(survey4);
             surveyRepository.save(survey5);
-
         };
     }
 

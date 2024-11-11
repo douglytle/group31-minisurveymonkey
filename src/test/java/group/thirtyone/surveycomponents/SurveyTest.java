@@ -31,4 +31,14 @@ class SurveyTest {
         survey.setName("test");
         assertEquals(survey.getName(), "test");
     }
+
+    @Test
+    void testNumber()
+    {
+        Survey survey = new Survey();
+        survey.addQuestion(new MultipleChoice());
+        survey.addQuestion(new NumberRange());
+
+        assertEquals(2, survey.getNumberOfQuestions());
+    }
 }
