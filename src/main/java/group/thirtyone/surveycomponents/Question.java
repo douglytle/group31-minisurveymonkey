@@ -1,7 +1,6 @@
 package group.thirtyone.surveycomponents;
 
 import java.util.List;
-import jakarta.persistence.*;
 
 public interface Question {
 
@@ -15,4 +14,5 @@ public interface Question {
     List<String> getChoices();
     int getMin();
     int getMax();
+    Long getId();
 }
