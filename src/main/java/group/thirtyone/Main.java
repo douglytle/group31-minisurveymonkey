@@ -34,10 +34,10 @@ public class Main {
         return args -> {
 
             Survey survey1 = new Survey();
-            survey1.setName("Sample survey title 1");
+            survey1.setName("First Survey");
 
             Survey survey2 = new Survey();
-            survey2.setName("Sample survey title 2");
+            survey2.setName("Second Survey of the Night");
 
             Survey survey3 = new Survey();
             survey3.setName("Sample survey title 3");
@@ -45,33 +45,27 @@ public class Main {
             Survey survey4 = new Survey();
             survey4.setName("Sample survey title 4");
 
-            Survey survey5 = new Survey();
-            survey5.setName("Sample survey title 5");
-
             ArrayList<String> choices = new ArrayList<>();
             choices.add("Choice 1");
             choices.add("Choice 2");
             choices.add("Choice 3");
 
-            survey1.setName("Sample Survey 1");
             survey1.addQuestion(new MultipleChoice(choices, "Choose a choice"));
             survey1.addQuestion(new MultipleChoice(choices, "Choose a choice again"));
             survey1.addQuestion(new OpenEnded("What is this question??"));
             survey1.addQuestion(new NumberRange("Pick a number", 2, 20));
             survey1.addQuestion(new NumberRange("Pick a numbers", 10, 50));
 
-            survey2.setName("Sample Survey 2");
             survey2.addQuestion(new MultipleChoice(choices, "Choose a choice"));
             survey2.addQuestion(new MultipleChoice(choices, "Choose a choice again"));
-            survey2.addQuestion(new OpenEnded("What is this question??"));
             survey2.addQuestion(new NumberRange("Pick a number", 2, 20));
+            survey2.addQuestion(new OpenEnded("A new open ended question"));
             survey2.addQuestion(new NumberRange("Pick a numbers", 10, 50));
 
             surveyRepository.save(survey1);
             surveyRepository.save(survey2);
             surveyRepository.save(survey3);
             surveyRepository.save(survey4);
-            surveyRepository.save(survey5);
         };
     }
 
