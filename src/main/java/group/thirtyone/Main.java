@@ -62,6 +62,25 @@ public class Main {
             survey2.addQuestion(new OpenEnded("A new open ended question"));
             survey2.addQuestion(new NumberRange("Pick a numbers", 10, 50));
 
+            survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 3");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 3");
+
+            survey1.getOpenEndedQuestions().get(0).addAnswer("Open Ended Answer 1");
+            survey1.getOpenEndedQuestions().get(0).addAnswer("Open Ended Answer 2");
+
+            survey1.getNumberRangeQuestions().get(0).addAnswer("10");
+            survey1.getNumberRangeQuestions().get(0).addAnswer("13");
+            survey1.getNumberRangeQuestions().get(0).addAnswer("20");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("10");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("10");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("23");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("13");
+
             surveyRepository.save(survey1);
             surveyRepository.save(survey2);
             surveyRepository.save(survey3);

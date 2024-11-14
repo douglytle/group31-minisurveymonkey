@@ -6,6 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link th:href="@{/css/results.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/results.js}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
 
@@ -23,10 +25,50 @@
 <!-- Tab content -->
 <div id="OpenEnded" class="tabcontent">
     <h3>Open Ended Responses</h3>
+    <div th:each="openended,iter : ${openended}">
+        <h4 th:text="${openended.getQuestion()}"/>
+        <div th:each="answer,iter : ${openended.getAnswers()}">
+            <p th:text="${answer}"/>
+        </div>
+    </div>
 </div>
 
 <div id="MultipleChoice" class="tabcontent">
     <h3>Multiple Choice Responses</h3>
+    <div th:each="mcq,iter : ${multiplechoice}">
+        <div th:id="mcqchart + ${mcq.getId()}" style="width: 40%; height: 400px; display: block;">
+            <script th:inline="javascript">
+                $(document).ready(function () {
+                    /*[+
+                    let [(mcqmap + ${mcq.getId()})] = [[${mcqmaplist.get(iter.index)}]];
+                    +]*/
+                        /*[+
+                    let [(dataPoints + ${mcq.getId()})] = [];
+                    +]*/
+                    for (mcqm in /*[(mcqmap + ${mcq.getId()})]*/) {
+                        /*[+[(dataPoints + ${mcq.getId()})]+]*/.push({
+                            'label': mcqm,
+                            'y': /*[+[(mcqmap + ${mcq.getId()})][mcqm]+]*/
+                        })
+                    }
+
+                    var /*[+[(choiceChart + ${mcq.getId()})]+]*/ =
+                    new CanvasJS.Chart( /*[[mcqchart + ${mcq.getId()}]]*/, {
+                        animationEnabled: true,
+                        title: {text: /*[[${mcq.getQuestion()}]]*/},
+                        data: [{
+                            type: "pie",
+                            startAngle: 240,
+                            indexLabel: "{label} {y}",
+                            dataPoints: /*[(dataPoints + ${mcq.getId()})]*/
+                        }]
+                    })
+
+                    /*[+[(choiceChart + ${mcq.getId()})]+]*/.render();
+                });
+            </script>
+        </div><br/>
+    </div>
 </div>
 
 <div id="NumberRange" class="tabcontent">
