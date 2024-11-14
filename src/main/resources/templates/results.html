@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Results</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link th:href="@{/css/results.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/results.js}"></script>
+</head>
+<body>
+
+<div class="tab">
+    <button class="tablinks" onclick="viewQuestion(event, 'OpenEnded')" id="defaultOpen">Open Ended</button>
+    <button class="tablinks" onclick="viewQuestion(event, 'MultipleChoice')">Multiple Choice</button>
+    <button class="tablinks" onclick="viewQuestion(event, 'NumberRange')">Number Range</button>
+</div>
+
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+
+<!-- Tab content -->
+<div id="OpenEnded" class="tabcontent">
+    <h3>Open Ended Responses</h3>
+</div>
+
+<div id="MultipleChoice" class="tabcontent">
+    <h3>Multiple Choice Responses</h3>
+</div>
+
+<div id="NumberRange" class="tabcontent">
+    <h3>Number Range Responses</h3>
+</div>
+
+
+</body>
+</html>
