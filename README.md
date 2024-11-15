@@ -2,7 +2,7 @@
 
 ## Status of Project
 Currently, the web application pulls stored surveys from the backend database and then displays a list of them in
-the homepage. A userAccount can click on one of the surveys and then display the survey. Survey answer submission and 
+the homepage. A user can click on one of the surveys and then display the survey. Survey answer submission and 
 survey creation currently does not work.
 
 For the next sprint (Nov 11 - Nov 25) survey creation and answer submission should be fixed, and th issues assigned 
