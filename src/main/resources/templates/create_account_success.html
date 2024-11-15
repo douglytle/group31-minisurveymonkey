@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Created</title>
+</head>
+<body>
+<h2>User Account Successfully Created</h2>
+<h3>ID of created account:</h3>
+<p th:text="${userAccount.id}"></p>
+<br>
+<h3>Username of created account:</h3>
+<p th:text="${userAccount.username}"></p>
+<br>
+<a href="/">Back to Home</a>
+</body>
+</html>
