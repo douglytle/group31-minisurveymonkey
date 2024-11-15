@@ -18,8 +18,24 @@ public class UserAccountController {
     UserAccountRepository userAccountRepository;
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String viewLogin(Model model) {
+        model.addAttribute("userInfo", new UserAccount());
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute UserAccount userInfo, Model model) {
+
+        Iterable<UserAccount> userAccountIterable = userAccountRepository.findAll();
+        for (UserAccount user : userAccountIterable) {
+            if (user.getUsername().equals(userInfo.getUsername())) {
+                if (user.getPassword().equals(userInfo.getPassword())) {
+                    model.addAttribute("userInfo", userInfo);
+                    return "login_success";
+                }
+            }
+        }
+        return "login_failure";
     }
 
     @GetMapping("/create_account")
@@ -37,6 +53,7 @@ public class UserAccountController {
                 return "create_account_failure";
             }
         }
+
         model.addAttribute("userAccount", userAccount);
         userAccountRepository.save(userAccount);
         return "create_account_success";
