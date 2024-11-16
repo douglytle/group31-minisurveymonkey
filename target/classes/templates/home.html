@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Mini Surveymonkey Home Page</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+<h1>Mini Surveymonkey - Group 31</h1>
+<br>
+<nav>
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+    </ul>
+</nav>
+<br>
+<h2>List of Surveys:</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Link</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="survey : ${surveys}">
+            <td th:text="${survey.id}"></td>
+            <td>
+                <a th:href="@{/{id}(id=${survey.id})}" th:text="${survey.name}"></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

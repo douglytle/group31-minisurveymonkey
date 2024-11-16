@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Survey</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/survey.css">
+
+</head>
+<body>
+<br>
+<a href="/">Back to list</a>
+<p>Survey Name:</p>
+<p th:text="${survey.name}"></p>
+
+<form class="surveySubmission">
+    <div th:each="question,iter : ${survey.getQuestions()}">
+        <div th:switch="${question.getType()}">
+            <div th:case="MCQ">
+                <p th:text="${question.getQuestion()}"/>
+                <ul>
+                    <li th:each="radioValue: ${question.getChoices()}">
+                        <input type="radio" th:name="mcq- + ${question.getId()}" th:value="${radioValue}" />
+                        <label th:text="${radioValue}"> </label>
+                    </li>
+                </ul>
+            </div>
+            <div th:case="OE">
+                <p th:text="${question.getQuestion()}"/>
+                <input type="text" name="openEnded-answer"/>
+            </div>
+            <div th:case="NR">
+                <p th:text="${question.getQuestion()}"/>
+                <div class="slidecontainer">
+                    <input type="range" th:min="${question.getMin()}" th:max="${question.getMax()}" th:value="${question.getMin()}" class="slider" oninput="this.nextElementSibling.value = this.value">
+                    <output th:text="${question.getMin()}"></output>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class="survey-submit" type="button" value="Submit"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,13 @@
+group\thirtyone\persistencerepositories\NumberRangeRepository.class
+group\thirtyone\controllers\SurveyAndUserControllers.class
+group\thirtyone\persistencerepositories\OpenEndedRepository.class
+group\thirtyone\surveycomponents\MultipleChoice.class
+group\thirtyone\persistencerepositories\MultipleChoiceRepository.class
+group\thirtyone\persistencerepositories\SurveyRepository.class
+group\thirtyone\surveycomponents\Survey.class
+group\thirtyone\controllers\CreateSurveyController.class
+group\thirtyone\surveycomponents\OpenEnded.class
+group\thirtyone\surveycomponents\Question.class
+group\thirtyone\Main.class
+group\thirtyone\surveycomponents\NumberRange.class
+group\thirtyone\controllers\HomePageController.class

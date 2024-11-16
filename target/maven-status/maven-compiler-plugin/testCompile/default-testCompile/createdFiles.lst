@@ -1,0 +1,5 @@
+group\thirtyone\surveycomponents\MultipleChoiceTest.class
+group\thirtyone\surveycomponents\OpenEndedTest.class
+group\thirtyone\surveycomponents\NumberRangeTest.class
+group\thirtyone\surveycomponents\SurveyTest.class
+group\thirtyone\surveycomponents\PersistenceTest.class
