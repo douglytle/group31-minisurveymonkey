@@ -12,6 +12,18 @@
         <li>
             <a href="/">Home</a>
         </li>
+        <li th:if="${username}">
+            <a href="/create">Create Survey</a>
+        </li>
+        <li th:unless="${username}">
+            <a href="/login">Login</a>
+        </li>
+        <li th:unless="${username}">
+            <a href="/create_account">Create Account</a>
+        </li>
+        <li th:if="${username}">
+            <a href="/logout">Log Out</a>
+        </li>
     </ul>
 </nav>
 <br>
@@ -21,7 +33,6 @@
         <tr>
             <th>ID</th>
             <th>Link</th>
-
         </tr>
     </thead>
     <tbody>
@@ -33,5 +44,8 @@
         </tr>
     </tbody>
 </table>
+<br><br>
+<p th:unless="${username}">You are not currently logged in.</p>
+<p th:if="${username}">You are currently logged in as: <span th:text="${username}"></span>.</p>
 </body>
 </html>

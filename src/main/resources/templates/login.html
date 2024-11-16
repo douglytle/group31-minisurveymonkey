@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login to MiniSurveyMonkey</title>
+</head>
+<body>
+<form method="POST" action="#" th:action="@{/login}" th:object="${userInfo}">
+    <fieldset>
+        <legend>Log In to User Account</legend>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" th:field="*{username}">
+        <br><br>
+        <label for="password">Password</label>
+        <input type="text" id="password" name="password" th:field="*{password}">
+        <br><br>
+        <button type="submit">Submit</button>
+    </fieldset>
+</form>
+<a href="/">Back to Home page</a>
+</body>
+</html>
