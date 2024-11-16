@@ -1,6 +1,8 @@
 package group.thirtyone;
 
+import group.thirtyone.othercomponents.UserAccount;
 import group.thirtyone.persistencerepositories.SurveyRepository;
+import group.thirtyone.persistencerepositories.UserAccountRepository;
 import group.thirtyone.surveycomponents.MultipleChoice;
 import group.thirtyone.surveycomponents.NumberRange;
 import group.thirtyone.surveycomponents.OpenEnded;
@@ -30,7 +32,7 @@ public class Main {
     }
 
     @Bean
-    public CommandLineRunner createDemoSurveys(SurveyRepository surveyRepository) {
+    public CommandLineRunner createDemoSurveys(SurveyRepository surveyRepository, UserAccountRepository userAccountRepository) {
         return args -> {
 
             Survey survey1 = new Survey();
@@ -81,8 +83,11 @@ public class Main {
             survey1.getNumberRangeQuestions().get(1).addAnswer("23");
             survey1.getNumberRangeQuestions().get(1).addAnswer("13");
 
-            surveyRepository.save(survey1);
-            surveyRepository.save(survey2);
+            UserAccount user1 = new UserAccount("asdasd", "123456");
+            user1.addSurvey(survey1);
+            user1.addSurvey(survey2);
+
+            userAccountRepository.save(user1);
             surveyRepository.save(survey3);
             surveyRepository.save(survey4);
         };
