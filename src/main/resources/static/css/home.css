@@ -1,0 +1,103 @@
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc; /* Light background */
+    color: #333; /* Dark gray text */
+    line-height: 1.6;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Title Styling */
+h1 {
+    text-align: center;
+    color: #2c3e50; /* Dark blue-gray */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+/* Navigation Bar */
+nav ul {
+    list-style-type: none;
+    text-align: center;
+    padding: 10px;
+    background-color: #34495e; /* Navy Blue */
+    border-radius: 5px;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ecf0f1; /* Light Gray */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    color: #1abc9c; /* Light Green */
+}
+
+/* Section Titles */
+h2 {
+    color: #34495e; /* Navy Blue */
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    text-align: left;
+    border-left: 5px solid #1abc9c; /* Light Green Bar */
+    padding-left: 10px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+table thead {
+    background-color: #1abc9c; /* Light Green */
+    color: white;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f4f7f8; /* Very Light Gray */
+}
+
+table tbody tr:hover {
+    background-color: #ecf0f1; /* Light Gray */
+    cursor: pointer;
+}
+
+table a {
+    color: #3498db; /* Bright Blue */
+    text-decoration: none;
+}
+
+table a:hover {
+    text-decoration: underline;
+    color: #2c3e50; /* Dark blue-gray */
+}
+
+/* Footer (if applicable) */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #7f8c8d; /* Gray */
+    font-size: 14px;
+}
