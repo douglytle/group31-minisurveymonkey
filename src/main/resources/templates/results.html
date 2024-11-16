@@ -73,6 +73,38 @@
 
 <div id="NumberRange" class="tabcontent">
     <h3>Number Range Responses</h3>
+    <div th:each="nr,iter : ${numberrange}">
+        <div th:id="nrchart + ${nr.getId()}" style="width: 40%; height: 400px; display: block;">
+            <script th:inline="javascript">
+                $(document).ready(function () {
+                    /*[+
+                    let [(nrmap + ${nr.getId()})] = [[${nrmaplist.get(iter.index)}]];
+                    +]*/
+                    /*[+
+                    let [(nrDataPoints + ${nr.getId()})] = [];
+                    +]*/
+                    for (nrm in /*[(nrmap + ${nr.getId()})]*/) {
+                        /*[+[(nrDataPoints + ${nr.getId()})]+]*/.push({
+                            'label': nrm,
+                            'y': /*[+[(nrmap + ${nr.getId()})][nrm]+]*/
+                        })
+                    }
+
+                    var /*[+[(rangeGraph + ${nr.getId()})]+]*/ =
+                    new CanvasJS.Chart( /*[[nrchart + ${nr.getId()}]]*/, {
+                        animationEnabled: true,
+                        title: {text: /*[[${nr.getQuestion()}]]*/},
+                        data: [{
+                            type: "column",
+                            dataPoints: /*[(nrDataPoints + ${nr.getId()})]*/
+                        }]
+                    })
+
+                        /*[+[(rangeGraph + ${nr.getId()})]+]*/.render();
+                });
+            </script>
+        </div><br/>
+    </div>
 </div>
 
 
