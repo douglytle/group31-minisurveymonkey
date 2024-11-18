@@ -58,8 +58,8 @@ public class Main {
             survey1.addQuestion(new NumberRange("Pick a number", 2, 20));
             survey1.addQuestion(new NumberRange("Pick a numbers", 10, 50));
 
-            survey2.addQuestion(new MultipleChoice(choices, "Choose a choice"));
-            survey2.addQuestion(new MultipleChoice(choices, "Choose a choice again"));
+            survey2.addQuestion(new MultipleChoice(choices, "Choose a first choice"));
+            survey2.addQuestion(new MultipleChoice(choices, "Choose a second choice"));
             survey2.addQuestion(new NumberRange("Pick some", 2, 20));
             survey2.addQuestion(new OpenEnded("A new open ended question"));
             survey2.addQuestion(new NumberRange("Pick more", 10, 50));
@@ -85,6 +85,20 @@ public class Main {
 
             survey2.getNumberRangeQuestions().get(0).addAnswer("10");
             survey2.getNumberRangeQuestions().get(1).addAnswer("10");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 3");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 3");
 
             UserAccount user1 = new UserAccount("admin", "admin");
             user1.addSurvey(survey1);
