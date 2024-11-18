@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <title>Create Survey</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="/createSurvey.js"></script>
+    <!--<script src="/createSurvey.js"></script> !-->
     <script type="text/javascript">
         var questionCount = 3;
 
         $(document).ready(function(){
-            $( ".addMCQuestion" ).click(function(){
+            /*$( ".addMCQuestion" ).click(function(){
                 var $clone = $( "ul.MCList" ).first().clone();
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addMCQuestion" );
                 console.log("added MC question");
                 questionCount++;
-            });
+            });*/
 
             $( ".addNRQuestion" ).click(function(){
                 var $clone = $( "ul.NRList" ).first().clone();
@@ -57,21 +57,16 @@
         <p>Survey Name: <input type="text" th:field="*{name}" /> </p>
 
         <p>Multiple Choice Questions:</p>
-        <ul th:each="MCQuestion: *{multipleChoiceQuestions}" class="MCList" id="MCList">
+        <ul th:each="MCQuestion: ${MCQuestions}" class="MCList" id="MCList" th:object="${MCQuestions}">
             <li>
                 <div class="multipleChoice" id="multipleChoice">
                     <label>Question text 1: </label>
-                    <input type="text" th:value="${MCQuestion.getQuestion()}"><br>
+                    <input type="text" th:value="${MCQuestion.question}"><br>
                     <p>List the choices (please note the first two are mandatory, they have been marked for your convenience):</p>
-                    <ul>
+                    <ul th:each="MCChoice: ${MCQuestion.getChoices()}">
                         <li class="choice">
                             <label>Choice: </label>
-                            <input type="text" th:value="${MCQuestion.getChoices().getFirst()}">
-                        </li>
-
-                        <li>
-                            <label>Choice: </label>
-                            <input type="text" th:value="${MCQuestion.getChoices().get(1)}"><br>
+                            <input type="text" th:value="|${MCChoice}|"><br>
                         </li>
                     </ul>
 
@@ -81,10 +76,10 @@
                 </div>
             </li>
         </ul>
-    <button type="button" class="addMCQuestion" id="addMCQuestion">+</button>
+    <button type="submit" class="addMCQuestion" id="addMCQuestion" name="addMCQuestion">+</button>
 
     <p>Number Range Questions:</p>
-    <ul th:each="NRQuestion: *{numberRangeQuestions}" class="NRList" id="NRList">
+    <ul th:each="NRQuestion: ${NRQuestions}" class="NRList" id="NRList">
         <li>
             <div class="numberRange" id="numberRange">
                 <label>Question text 2: </label>
@@ -100,7 +95,7 @@
     <button type="button" class="addNRQuestion" id="addNRQuestion">+</button>
 
     <p>Open Ended Questions:</p>
-    <ul th:each="OEQuestion: *{openEndedQuestions}" class="OEList" id="OEList">
+    <ul th:each="OEQuestion: ${OEQuestions}" class="OEList" id="OEList">
         <li>
             <div class="openEnded" id="openEnded">
                 <label>Question text 3: </label>
