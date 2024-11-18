@@ -5,6 +5,7 @@ import group.thirtyone.persistencerepositories.SurveyRepository;
 import group.thirtyone.persistencerepositories.UserAccountRepository;
 import group.thirtyone.surveycomponents.MultipleChoice;
 import group.thirtyone.surveycomponents.NumberRange;
+import group.thirtyone.surveycomponents.OpenEnded;
 import group.thirtyone.surveycomponents.Survey;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,17 +77,26 @@ public class UserAccountController {
     @Autowired
     SurveyRepository surveyRepository;
 
-    @GetMapping("/{id}/results")
-    public String results(@PathVariable Long id, Model model) {
-        Optional<Survey> result = surveyRepository.findById(id);
-        if (result.isPresent()) {
-            Survey survey = result.get();
-            model.addAttribute("numberrange", survey.getNumberRangeQuestions());
-            model.addAttribute("openended", survey.getOpenEndedQuestions());
-            model.addAttribute("multiplechoice", survey.getMultipleChoiceQuestions());
+    @GetMapping("/dashboard")
+    public String dashboard(Model model, HttpSession session) {
+
+        //Optional<Survey> result = surveyRepository.findById(id);
+        model.addAttribute("username", session.getAttribute("username"));
+        UserAccount currentUser = userAccountRepository.findByUsername(session.getAttribute("username").toString());
+
+        ArrayList<List<NumberRange>> totalNumberRanges = new ArrayList<>();
+        ArrayList<List<MultipleChoice>> totalMultipleChoices = new ArrayList<>();
+        ArrayList<List<OpenEnded>> totalOpenEndeds = new ArrayList<>();
+        ArrayList<ArrayList<Map<String,Integer>>> mcqmaplistlist = new ArrayList<>();
+        ArrayList<ArrayList<Map<String,Integer>>> nrmaplistlist = new ArrayList<>();
+
+        for (Survey survey : currentUser.getSurveys()) {
+            List<NumberRange> numberRanges = survey.getNumberRangeQuestions();
+            List<MultipleChoice> multipleChoices = survey.getMultipleChoiceQuestions();
+            List<OpenEnded> openEndeds = survey.getOpenEndedQuestions();
 
             ArrayList<Map<String,Integer>> mcqmaplist = new ArrayList<>();
-            for (MultipleChoice mcq : survey.getMultipleChoiceQuestions()) {
+            for (MultipleChoice mcq : multipleChoices) {
                 Map<String,Integer> mcqmap = new HashMap<>();
                 for (String choice : mcq.getChoices()) {
                     mcqmap.put(choice, Collections.frequency(mcq.getAnswers(), choice));
@@ -94,9 +104,11 @@ public class UserAccountController {
                 mcqmaplist.add(mcqmap);
             }
 
+            mcqmaplistlist.add(mcqmaplist);
+
             ArrayList<Map<String,Integer>> nrmaplist = new ArrayList<>();
 
-            for (NumberRange nr : survey.getNumberRangeQuestions()) {
+            for (NumberRange nr : numberRanges) {
                 HashSet<String> nrAnswers = new HashSet<>(nr.getAnswers());
                 Map<String,Integer> nrmap = new HashMap<>();
                 for (String choice : nrAnswers) {
@@ -105,10 +117,25 @@ public class UserAccountController {
                 nrmaplist.add(nrmap);
             }
 
-            model.addAttribute("mcqmaplist", mcqmaplist);
-            model.addAttribute("nrmaplist", nrmaplist);
-            model.addAttribute("survey", survey);
+            nrmaplistlist.add(nrmaplist);
+
+            totalOpenEndeds.add(openEndeds);
+            totalMultipleChoices.add(multipleChoices);
+            totalNumberRanges.add(numberRanges);
         }
+
+        System.out.println(totalNumberRanges);
+        System.out.println(totalMultipleChoices);
+        System.out.println(totalOpenEndeds);
+        System.out.println(mcqmaplistlist);
+        System.out.println(nrmaplistlist);
+        System.out.println(currentUser.getSurveys());
+        model.addAttribute("numberranges", totalNumberRanges);
+        model.addAttribute("openendeds", totalOpenEndeds);
+        model.addAttribute("multiplechoices", totalMultipleChoices);
+        model.addAttribute("mcqmaplists", mcqmaplistlist);
+        model.addAttribute("nrmaplists", nrmaplistlist);
+        model.addAttribute("surveys", currentUser.getSurveys());
 
         return "userdash";
     }

@@ -60,9 +60,9 @@ public class Main {
 
             survey2.addQuestion(new MultipleChoice(choices, "Choose a choice"));
             survey2.addQuestion(new MultipleChoice(choices, "Choose a choice again"));
-            survey2.addQuestion(new NumberRange("Pick a number", 2, 20));
+            survey2.addQuestion(new NumberRange("Pick some", 2, 20));
             survey2.addQuestion(new OpenEnded("A new open ended question"));
-            survey2.addQuestion(new NumberRange("Pick a numbers", 10, 50));
+            survey2.addQuestion(new NumberRange("Pick more", 10, 50));
 
             survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
             survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
@@ -83,9 +83,13 @@ public class Main {
             survey1.getNumberRangeQuestions().get(1).addAnswer("23");
             survey1.getNumberRangeQuestions().get(1).addAnswer("13");
 
-            UserAccount user1 = new UserAccount("asdasd", "123456");
+            survey2.getNumberRangeQuestions().get(0).addAnswer("10");
+            survey2.getNumberRangeQuestions().get(1).addAnswer("10");
+
+            UserAccount user1 = new UserAccount("admin", "admin");
             user1.addSurvey(survey1);
             user1.addSurvey(survey2);
+
 
             userAccountRepository.save(user1);
             surveyRepository.save(survey3);
