@@ -42,6 +42,7 @@ public class MultipleChoice implements Question {
     public MultipleChoice(List<String> choices, String question) {
         this.choices = choices;
         this.question = question;
+        answers = new ArrayList<>();
     }
 
     /**

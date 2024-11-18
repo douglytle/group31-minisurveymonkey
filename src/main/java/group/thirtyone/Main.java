@@ -1,6 +1,8 @@
 package group.thirtyone;
 
+import group.thirtyone.othercomponents.UserAccount;
 import group.thirtyone.persistencerepositories.SurveyRepository;
+import group.thirtyone.persistencerepositories.UserAccountRepository;
 import group.thirtyone.surveycomponents.MultipleChoice;
 import group.thirtyone.surveycomponents.NumberRange;
 import group.thirtyone.surveycomponents.OpenEnded;
@@ -30,7 +32,7 @@ public class Main {
     }
 
     @Bean
-    public CommandLineRunner createDemoSurveys(SurveyRepository surveyRepository) {
+    public CommandLineRunner createDemoSurveys(SurveyRepository surveyRepository, UserAccountRepository userAccountRepository) {
         return args -> {
 
             Survey survey1 = new Survey();
@@ -56,14 +58,54 @@ public class Main {
             survey1.addQuestion(new NumberRange("Pick a number", 2, 20));
             survey1.addQuestion(new NumberRange("Pick a numbers", 10, 50));
 
-            survey2.addQuestion(new MultipleChoice(choices, "Choose a choice"));
-            survey2.addQuestion(new MultipleChoice(choices, "Choose a choice again"));
-            survey2.addQuestion(new NumberRange("Pick a number", 2, 20));
+            survey2.addQuestion(new MultipleChoice(choices, "Choose a first choice"));
+            survey2.addQuestion(new MultipleChoice(choices, "Choose a second choice"));
+            survey2.addQuestion(new NumberRange("Pick some", 2, 20));
             survey2.addQuestion(new OpenEnded("A new open ended question"));
-            survey2.addQuestion(new NumberRange("Pick a numbers", 10, 50));
+            survey2.addQuestion(new NumberRange("Pick more", 10, 50));
 
-            surveyRepository.save(survey1);
-            surveyRepository.save(survey2);
+            survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 1");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 3");
+            survey1.getMultipleChoiceQuestions().get(1).addAnswer("Choice 3");
+
+            survey1.getOpenEndedQuestions().get(0).addAnswer("Open Ended Answer 1");
+            survey1.getOpenEndedQuestions().get(0).addAnswer("Open Ended Answer 2");
+
+            survey1.getNumberRangeQuestions().get(0).addAnswer("10");
+            survey1.getNumberRangeQuestions().get(0).addAnswer("13");
+            survey1.getNumberRangeQuestions().get(0).addAnswer("20");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("10");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("10");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("23");
+            survey1.getNumberRangeQuestions().get(1).addAnswer("13");
+
+            survey2.getNumberRangeQuestions().get(0).addAnswer("10");
+            survey2.getNumberRangeQuestions().get(1).addAnswer("10");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(0).addAnswer("Choice 3");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 1");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 2");
+            survey2.getMultipleChoiceQuestions().get(1).addAnswer("Choice 3");
+
+            UserAccount user1 = new UserAccount("admin", "admin");
+            user1.addSurvey(survey1);
+            user1.addSurvey(survey2);
+
+
+            userAccountRepository.save(user1);
             surveyRepository.save(survey3);
             surveyRepository.save(survey4);
         };

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Results</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link th:href="@{/css/results.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/results.js}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+
+<div class="vtab">
+    <button th:each="survey,iter : ${surveys}" th:id="surveyclass+${survey.getId()}" class="vtablinks" th:data-name="${survey.name}" th:onclick="viewSurvey(event, this.getAttribute('data-name'))" th:text="${survey.name}"></button>
+</div>
+
+
+<div th:each="survey,seriter : ${surveys}" th:id="${survey.name}" class="vtabcontent">
+    <div class="htab">
+        <button class="htablinks" th:onclick="|viewQuestion(event, 'OpenEnded${survey.getId()}')|" th:id="defaultOpen+${survey.getId()}">Open Ended</button>
+        <button class="htablinks" th:onclick="|viewQuestion(event, 'MultipleChoice${survey.getId()}')|">Multiple Choice</button>
+        <button class="htablinks" th:onclick="|viewQuestion(event, 'NumberRange${survey.getId()}')|">Number Range</button>
+    </div>
+
+    <script>
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("[[defaultOpen + ${survey.getId()}]]").click();
+    </script>
+
+    <!-- Horizontal Tab content -->
+    <div th:id="OpenEnded+${survey.getId()}" class="htabcontent">
+        <h3>Open Ended Responses</h3>
+        <div th:each="openended,iter : ${survey.getOpenEndedQuestions()}">
+            <h4 th:text="${openended.getQuestion()}"/>
+            <div th:each="answer,iter : ${openended.getAnswers()}">
+                <p th:text="${answer}"/>
+            </div>
+        </div>
+    </div>
+
+    <div th:id="MultipleChoice+${survey.getId()}" class="htabcontent">
+        <h3>Multiple Choice Responses</h3>
+        <div th:each="mcq,iter : ${survey.getMultipleChoiceQuestions()}">
+            <div th:id="mcqchart + ${mcq.getId()}" style="width: 40%; height: 400px; display: block;">
+                <script th:inline="javascript">
+                    $(document).ready(function () {
+                        /*[+
+                        let [(mcqmap + ${mcq.getId()})] = [[${mcqmaplists.get(seriter.index).get(iter.index)}]];
+                        +]*/
+                            /*[+
+                        let [(dataPoints + ${mcq.getId()})] = [];
+                        +]*/
+                        for (mcqm in /*[(mcqmap + ${mcq.getId()})]*/) {
+                            /*[+[(dataPoints + ${mcq.getId()})]+]*/.push({
+                                'label': mcqm,
+                                'y': /*[+[(mcqmap + ${mcq.getId()})][mcqm]+]*/
+                            })
+                        }
+
+                        var /*[+[(choiceChart + ${mcq.getId()})]+]*/ =
+                        new CanvasJS.Chart( /*[[mcqchart + ${mcq.getId()}]]*/, {
+                            animationEnabled: true,
+                            title: {text: /*[[${mcq.getQuestion()}]]*/},
+                            data: [{
+                                type: "pie",
+                                startAngle: 240,
+                                indexLabel: "{label} {y}",
+                                dataPoints: /*[(dataPoints + ${mcq.getId()})]*/
+                            }]
+                        })
+
+                        /*[+[(choiceChart + ${mcq.getId()})]+]*/.render();
+                    });
+                </script>
+            </div><br/>
+        </div>
+    </div>
+
+    <div th:id="NumberRange+${survey.getId()}" class="htabcontent">
+        <h3>Number Range Responses</h3>
+        <div th:each="nr,iter : ${survey.getNumberRangeQuestions()}">
+            <div th:id="nrchart + ${nr.getId()}" style="width: 40%; height: 400px; display: block;">
+                <script th:inline="javascript">
+                    $(document).ready(function () {
+                        /*[+
+                        let [(nrmap + ${nr.getId()})] = [[${nrmaplists.get(seriter.index).get(iter.index)}]];
+                        +]*/
+                        /*[+
+                        let [(nrDataPoints + ${nr.getId()})] = [];
+                        +]*/
+                        for (nrm in /*[(nrmap + ${nr.getId()})]*/) {
+                            /*[+[(nrDataPoints + ${nr.getId()})]+]*/.push({
+                                'label': nrm,
+                                'y': /*[+[(nrmap + ${nr.getId()})][nrm]+]*/
+                            })
+                        }
+
+                        var /*[+[(rangeGraph + ${nr.getId()})]+]*/ =
+                        new CanvasJS.Chart( /*[[nrchart + ${nr.getId()}]]*/, {
+                            animationEnabled: true,
+                            title: {text: /*[[${nr.getQuestion()}]]*/},
+                            data: [{
+                                type: "column",
+                                dataPoints: /*[(nrDataPoints + ${nr.getId()})]*/
+                            }]
+                        })
+
+                            /*[+[(rangeGraph + ${nr.getId()})]+]*/.render();
+                    });
+                </script>
+            </div><br/>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("[[surveyclass + ${surveys.get(0).getId()}]]").click();
+</script>
+
+<div style="float:right;">
+    <p th:if="${username}">You are currently logged in as: <span th:text="${username}"></span>.</p>
+</div>
+
+</body>
+</html>

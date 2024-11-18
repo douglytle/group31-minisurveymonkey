@@ -72,6 +72,18 @@ public class Survey {
         return questions;
     }
 
+    public List<MultipleChoice> getMultipleChoiceQuestions() {
+        return multipleChoiceQuestions;
+    }
+
+    public List<NumberRange> getNumberRangeQuestions() {
+        return numberRangeQuestions;
+    }
+
+    public List<OpenEnded> getOpenEndedQuestions() {
+        return openEndedQuestions;
+    }
+
     /**
      * Gets the current number of questions
      * @return Returns the number of questions in the survey
