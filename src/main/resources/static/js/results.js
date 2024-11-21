@@ -19,11 +19,9 @@ function viewQuestion(evt, questionType) {
     evt.currentTarget.className += " active";
 }
 
-function viewSurvey(evt, survey) {
+function viewSurvey(evt, survey, id) {
     // Declare all variables
     var i, tabcontent, tablinks;
-
-    console.log(survey)
 
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("vtabcontent");
@@ -39,5 +37,6 @@ function viewSurvey(evt, survey) {
 
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(survey).style.display = "block";
+    document.getElementById("currentid").text(id);
     evt.currentTarget.className += " active";
 }
