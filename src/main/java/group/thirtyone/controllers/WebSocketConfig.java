@@ -10,6 +10,6 @@ import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 public class WebSocketConfig implements WebSocketConfigurer {
 
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new SocketTextHandler(), "/comms/survey-speak");
+        registry.addHandler(new SocketTextHandler(), "/comms/survey-speak").setAllowedOrigins("*");
     }
 }
