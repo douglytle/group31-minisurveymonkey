@@ -45,8 +45,15 @@ public class HomePageController {
         Optional<Survey> result = surveyRepository.findById(id);
         if (result.isPresent()) {
             Survey survey = result.get();
-            model.addAttribute("survey", survey);
-            return "survey";
+            if (survey.isActive())
+            {
+                model.addAttribute("survey", survey);
+                return "survey";
+            }
+            else
+            {
+                return "closedsurvey";
+            }
         }
         return "error";
     }

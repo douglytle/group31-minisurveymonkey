@@ -18,10 +18,11 @@ function disconnect() {
 
 function sendData(message, id) {
     var data = JSON.stringify({
-        'message' : message,
+        'type': "CLOSE_SURVEY",
         'id': id
     })
     ws.send(data);
+    $("#surveystatus" + id).text("Survey Status: Closed")
 }
 
 // function helloWorld(message) {

@@ -1,10 +1,13 @@
 var ws;
+var currid;
 
-function connect() {
+function connect(id) {
+    currid = "#" + id + "#"
     ws = new WebSocket('ws://localhost:8080/comms/survey-speak');
-    console.log("connected")
     ws.onmessage = function(data) {
-        console.log(data.data);
+        if (data.data.includes("CLOSE") && data.data.includes(currid)) {
+            location.reload();
+        }
     }
     //setConnected(true);
 }
