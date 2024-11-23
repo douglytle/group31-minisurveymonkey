@@ -3,7 +3,8 @@ var currid;
 
 function connect(id) {
     currid = "#" + id + "#"
-    ws = new WebSocket('ws://localhost:8080/comms/survey-speak');
+    var baseURL = window.location.origin
+    ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
         if (data.data.includes("CLOSE") && data.data.includes(currid)) {
             location.reload();

@@ -8,14 +8,14 @@ survey creation currently does not work.
 For the next sprint (Nov 11 - Nov 25) survey creation and answer submission should be fixed, and th issues assigned 
 to Milestone 2 (#8, #9, #10, #11) will be implemented
 
+## Build and Deploy Statuses
+[![Build Status (Java CI With Maven)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/maven.yml/badge.svg)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/maven.yml)
+
+[![Deploy Status (Azure App Service)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/main_mini-surveymonkey-group31.yml/badge.svg)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/main_mini-surveymonkey-group31.yml)
+
 ## Diagrams
 ### UML Diagram of Model
 ![group31-minisurveymonkey-UML-diagram-of-model.png](diagrams%2Fgroup31-minisurveymonkey-UML-diagram-of-model.png)
 
 ### Diagram of Database Schema
 ![SYSC4806-G31-SurveyMonkey.png](diagrams%2FSYSC4806-G31-SurveyMonkey.png)
-
-## Build and Deploy Statuses
-[![Build Status (Java CI With Maven)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/maven.yml/badge.svg)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/maven.yml)
-
-[![Deploy Status (Azure App Service)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/main_mini-surveymonkey-group31.yml/badge.svg)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/main_mini-surveymonkey-group31.yml)
