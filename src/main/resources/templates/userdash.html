@@ -5,22 +5,31 @@
     <title>Survey Results</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link th:href="@{/css/results.css}" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
     <script type="text/javascript" th:src="@{/js/results.js}"></script>
+    <script type="text/javascript" th:src="@{/js/userdash.js}"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
 
 <div class="vtab">
-    <button th:each="survey,iter : ${surveys}" th:id="surveyclass+${survey.getId()}" class="vtablinks" th:data-name="${survey.name}" th:onclick="viewSurvey(event, this.getAttribute('data-name'))" th:text="${survey.name}"></button>
+    <button th:each="survey,iter : ${surveys}" th:id="surveyclass+${survey.getId()}" class="vtablinks" th:data-name="${survey.name}" th:data-id="${survey.getId()}" th:onclick="viewSurvey(event, this.getAttribute('data-name'), this.getAttribute('data-id'))" th:text="${survey.name}"></button>
 </div>
 
+<p id="currentid" hidden></p>
+
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    connect();
+</script>
 
 <div th:each="survey,seriter : ${surveys}" th:id="${survey.name}" class="vtabcontent">
     <div class="htab">
         <button class="htablinks" th:onclick="|viewQuestion(event, 'OpenEnded${survey.getId()}')|" th:id="defaultOpen+${survey.getId()}">Open Ended</button>
         <button class="htablinks" th:onclick="|viewQuestion(event, 'MultipleChoice${survey.getId()}')|">Multiple Choice</button>
         <button class="htablinks" th:onclick="|viewQuestion(event, 'NumberRange${survey.getId()}')|">Number Range</button>
+        <button class="htablinks" th:onclick="|viewQuestion(event, 'Settings${survey.getId()}')|">Status</button>
     </div>
 
     <script>
@@ -110,6 +119,18 @@
                     });
                 </script>
             </div><br/>
+        </div>
+    </div>
+    <div th:id="Settings+${survey.getId()}" class="htabcontent">
+        <h3>Status</h3>
+        <div th:switch="${survey.isActive()}">
+            <p th:id="surveystatus + ${survey.getId}" th:case="true">Survey Status: Active</p>
+            <p th:id="surveystatus + ${survey.getId}" th:case="false">Survey Status: Closed</p>
+        </div>
+
+        <div>
+        <h3>Danger</h3>
+            <button id="close" th:onclick="|sendData('This is a test message!!', '${survey.getId()}')|">Close Survey</button>
         </div>
     </div>
 </div>

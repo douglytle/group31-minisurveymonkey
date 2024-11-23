@@ -1,7 +1,6 @@
 package group.thirtyone.controllers;
 
 import group.thirtyone.persistencerepositories.SurveyRepository;
-import group.thirtyone.surveycomponents.Question;
 import group.thirtyone.surveycomponents.Survey;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +37,17 @@ public class HomePageController {
         Optional<Survey> result = surveyRepository.findById(id);
         if (result.isPresent()) {
             Survey survey = result.get();
-            model.addAttribute("survey", survey);
-            return "survey";
+            if (survey.isActive())
+            {
+                model.addAttribute("survey", survey);
+                return "survey";
+            }
+            else
+            {
+                return "closed_survey";
+            }
         }
         return "error";
     }
+
 }
