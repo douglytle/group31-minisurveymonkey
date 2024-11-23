@@ -1,0 +1,93 @@
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc; /* Light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Login Container */
+form {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    width: 350px;
+    text-align: center;
+}
+
+form h2 {
+    color: #2c3e50; /* Dark Blue */
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #34495e; /* Navy Blue */
+}
+/* Password Toggle Button */
+button#togglePassword {
+    background-color: #ecf0f1; /* Light Gray */
+    border: 1px solid #ddd;
+    color: #2c3e50; /* Dark Blue */
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+button#togglePassword:hover {
+    background-color: #3498db; /* Bright Blue */
+    color: white;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Password Dots */
+input[type="password"] {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+}
+
+/* Submit Button */
+form input[type="submit"] {
+    background-color: #1abc9c; /* Light Green */
+    color: white;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+form input[type="submit"]:hover {
+    background-color: #16a085; /* Slightly darker green */
+}
+
+/* Back to Home Link */
+a {
+    display: block;
+    margin-top: 15px;
+    color: #3498db; /* Bright Blue */
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,46 @@
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc; /* Light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+/* Failure Message Container */
+div.container {
+    background-color: #fdecea; /* Light Red background for failure */
+    border: 1px solid #e74c3c; /* Red Border */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    width: 400px;
+}
+
+div.container h2 {
+    margin-bottom: 15px;
+    color: #e74c3c; /* Red */
+    font-weight: bold;
+}
+
+div.container p {
+    margin-bottom: 20px;
+    color: #34495e; /* Navy Blue */
+}
+
+/* Links */
+a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #3498db; /* Bright Blue */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+a:hover {
+    text-decoration: underline;
+}

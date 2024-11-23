@@ -8,8 +8,13 @@
     <script type="text/javascript" th:src="@{/js/results.js}"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <link rel="stylesheet" href="/css/userdash.css">
 </head>
 <body>
+
+<div class="user-info">
+    You are currently logged in as: <span th:text="${username}"></span>.
+</div>
 
 <div class="vtab">
     <button th:each="survey,iter : ${surveys}" th:id="surveyclass+${survey.getId()}" class="vtablinks" th:data-name="${survey.name}" th:onclick="viewSurvey(event, this.getAttribute('data-name'))" th:text="${survey.name}"></button>
@@ -118,10 +123,6 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("[[surveyclass + ${surveys.get(0).getId()}]]").click();
 </script>
-
-<div style="float:right;">
-    <p th:if="${username}">You are currently logged in as: <span th:text="${username}"></span>.</p>
-</div>
 
 </body>
 </html>
