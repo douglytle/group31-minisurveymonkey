@@ -17,8 +17,8 @@
             <div th:case="MCQ">
                 <p th:text="${question.getQuestion()}"/>
                 <ul>
-                    <li th:each="radioValue: ${survey.getQuestions().get(0).getChoices()}">
-                        <input type="radio" name="mcq-answer" th:value="${radioValue}" />
+                    <li th:each="radioValue: ${question.getChoices()}">
+                        <input type="radio" th:name="mcq- + ${question.getId()}" th:value="${radioValue}" />
                         <label th:text="${radioValue}"> </label>
                     </li>
                 </ul>
@@ -38,5 +38,8 @@
     </div>
     <input class="survey-submit" type="button" value="Submit"/>
 </form>
+<br><br>
+<p th:unless="${username}">You are not currently logged in.</p>
+<p th:if="${username}">You are currently logged in as: <span th:text="${username}"></span>.</p>
 </body>
 </html>
