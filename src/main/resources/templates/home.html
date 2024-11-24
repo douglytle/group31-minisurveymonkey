@@ -39,7 +39,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr th:each="survey : ${surveys}">
+        <tr th:each="survey : ${surveys}" th:if="${survey.isActive()}">
             <td th:text="${survey.id}"></td>
             <td>
                 <a th:href="@{/{id}(id=${survey.id})}" th:text="${survey.name}"></a>
