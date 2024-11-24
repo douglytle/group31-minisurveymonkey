@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <title>Create Survey</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <!--<script src="/createSurvey.js"></script> !-->
     <script type="text/javascript">
         var questionCount = 3;
 
         $(document).ready(function(){
-            $( ".addMCQuestion" ).click(function(){
-                var $clone = $( "ul.MCList" ).first().clone();
+            $( ".addMCQuestion" ).on("click", function(){
+                var $clone = $( "ul.MCList" ).first().clone(true);
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addMCQuestion" );
                 console.log("added MC question");
@@ -18,7 +17,7 @@
             });
 
             $( ".addNRQuestion" ).click(function(){
-                var $clone = $( "ul.NRList" ).first().clone();
+                var $clone = $( "ul.NRList" ).first().clone(true);
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addNRQuestion" );
                 console.log("added NR question");
@@ -26,17 +25,17 @@
             });
 
             $( ".addOEQuestion" ).click(function(){
-                var $clone = $( "ul.OEList" ).first().clone();
+                var $clone = $( "ul.OEList" ).first().clone(true);
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addOEQuestion" );
                 console.log("added OE question");
                 questionCount++;
             });
 
-            $( ".addChoice" ).click(function(){
-                var $clone = $( "li.choice" ).first().clone();
+            $( ".addChoice" ).on("click", function(){
+                var $clone = $( "li.choice" ).first().clone(true);
                 $clone.append( "<button type='button' class='removeChoice'>-</button>" );
-                $clone.insertBefore( ".addChoice" );
+                $clone.insertBefore($(this));
                 console.log("added MC choice");
             });
 
@@ -69,13 +68,18 @@
 
 <form class="createSurvey">
         <p>Survey Name: <input type="text" name="surveyName"/> </p>
+    <p>Note: Any questions with blank question text will be excluded.</p>
+    <p>Order of questions is ascending, for example 1 will be the first question on the list, 2 will be the second, etc.</p>
+    <p>Multiple questions with the same order will be one after the other at random.</p>
 
         <p>Multiple Choice Questions:</p>
         <ul class="MCList" id="MCList">
             <li>
                 <div class="multipleChoice" id="multipleChoice">
-                    <label>Question text 1: </label>
+                    <label>Question text: </label>
                     <input type="text" class="MCQuestion" name="MCQuestion"><br>
+                    <label>Order on page: </label>
+                    <input type="number" class="MCOrder" name="MCOrder" value="0"><br>
                     <p>List the choices (please note the first two are mandatory, they have been marked for your convenience):</p>
                     <ul>
                         <li class="choice">
@@ -83,41 +87,41 @@
                             <input type="text" class="MCChoice" name="MCChoice"><br>
                         </li>
                     </ul>
-                    <button type="button" class="addChoice" id="addChoice">+</button>
-
-                    <label>Order on page: WIP</label>
+                    <button type="button" class="addChoice" id="addChoice">Add choice</button>
                 </div>
             </li>
         </ul>
-    <button type="button" class="addMCQuestion" name="addMCQuestion">+</button>
+    <button type="button" class="addMCQuestion" name="addMCQuestion">Add Multiple Choice Question</button>
 
     <p>Number Range Questions:</p>
     <ul class="NRList" id="NRList">
         <li>
             <div class="numberRange" id="numberRange">
-                <label>Question text 2: </label>
+                <label>Question text: </label>
                 <input type="text" class="NRQuestion" name="NRQuestion"><br>
+                <label>Order on page: </label>
+                <input type="number" class="NROrder" name="NROrder" value="0"><br>
                 <label>Minimum value: </label>
-                <input type="number" class="NRMin" name="NRMin"><br>
+                <input type="number" class="NRMin" name="NRMin" value="0"><br>
                 <label>Maximum value: </label>
-                <input type="number" class="NRMax" name="NRMax"><br>
-                <label>Order on page: WIP</label>
+                <input type="number" class="NRMax" name="NRMax" value="0"><br>
             </div>
         </li>
     </ul>
-    <button type="button" class="addNRQuestion" id="addNRQuestion">+</button>
+    <button type="button" class="addNRQuestion" id="addNRQuestion">Add Number Range Question</button>
 
     <p>Open Ended Questions:</p>
     <ul class="OEList" id="OEList">
         <li>
             <div class="openEnded" id="openEnded">
-                <label>Question text 3: </label>
+                <label>Question text: </label>
                 <input type="text" name="OEQuestion"><br>
-                <label>Order on page: WIP</label>
+                <label>Order on page: </label>
+                <input type="number" class="OEOrder" name="OEOrder" value="0"><br>
             </div>
         </li>
     </ul>
-    <button type="button" class="addOEQuestion" id="addOEQuestion">+</button>
+    <button type="button" class="addOEQuestion" id="addOEQuestion">Add Open Ended Question</button>
     <p><input type="button" value="Submit" class="submit"/></p>
 </form>
 </body>
