@@ -30,7 +30,7 @@ public class CreateSurveyController {
     @PostMapping("/createSurvey")
     @CrossOrigin
     public String createSurveySubmit(@RequestBody String surveyJSON, HttpSession session) {
-        //UserAccount user = userAccountRepository.findByUsername(session.getAttribute("username").toString());
+        UserAccount user = userAccountRepository.findByUsername(session.getAttribute("username").toString());
         Survey survey = new Survey();
 
         String stripped = surveyJSON.replace("{","");
@@ -91,7 +91,7 @@ public class CreateSurveyController {
         for(Question question : questions){
             survey.addQuestion(question);
         }
-        surveyRepository.save(survey);
+        user.addSurvey(survey);
         return "home";
     }
 }
