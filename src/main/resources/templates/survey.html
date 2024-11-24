@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <title>View Survey</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/survey.js}"></script>
 </head>
 <body>
 <br>
 <a href="/">Back to list</a>
 <p>Survey Name:</p>
 <p th:text="${survey.name}"></p>
+
+<script>
+    connect("[[${survey.getId()}]]");
+</script>
+
 
 <form class="surveySubmission">
     <div th:each="question,iter : ${survey.getQuestions()}">
