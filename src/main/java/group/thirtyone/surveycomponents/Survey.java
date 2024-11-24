@@ -112,6 +112,18 @@ public class Survey {
         this.name = name;
     }
 
+    public void setMultipleChoiceQuestions(List<MultipleChoice> multipleChoiceQuestions) {
+        this.multipleChoiceQuestions = multipleChoiceQuestions;
+    }
+
+    public void setNumberRangeQuestions(List<NumberRange> numberRangeQuestions) {
+        this.numberRangeQuestions = numberRangeQuestions;
+    }
+
+    public void setOpenEndedQuestions(List<OpenEnded> openEndedQuestions) {
+        this.openEndedQuestions = openEndedQuestions;
+    }
+  
     public Long getId() {
         return this.id;
     }
