@@ -82,8 +82,6 @@ public class CreateSurveyController {
                         i+=2;
                     }
                     questions.add(mc);
-                    System.out.println("Question: " + mc.getQuestion());
-                    System.out.println(mc.getQuestion().length());
                 }
             }
         }
@@ -92,6 +90,7 @@ public class CreateSurveyController {
             survey.addQuestion(question);
         }
         user.addSurvey(survey);
+        surveyRepository.save(survey);
         return "home";
     }
 }
