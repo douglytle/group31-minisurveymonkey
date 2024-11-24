@@ -1,7 +1,8 @@
 var ws;
 
 function connect() {
-    ws = new WebSocket('ws://localhost:8080/comms/survey-speak');
+    var baseURL = window.location.origin
+    ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
         console.log(data.data);
     }

@@ -123,13 +123,6 @@ public class UserAccountController {
             totalMultipleChoices.add(multipleChoices);
             totalNumberRanges.add(numberRanges);
         }
-
-        System.out.println(totalNumberRanges);
-        System.out.println(totalMultipleChoices);
-        System.out.println(totalOpenEndeds);
-        System.out.println(mcqmaplistlist);
-        System.out.println(nrmaplistlist);
-        System.out.println(currentUser.getSurveys());
         model.addAttribute("numberranges", totalNumberRanges);
         model.addAttribute("openendeds", totalOpenEndeds);
         model.addAttribute("multiplechoices", totalMultipleChoices);

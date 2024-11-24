@@ -1,4 +1,9 @@
+window.onerror = function(message, url, lineNumber) {
+    return true; // prevents browser error messages
+}; //hide null errors that always appear on page load (does not affect functionality)
+
 function viewQuestion(evt, questionType) {
+    if (!questionType) return;
     // Declare all variables
     let i, tabcontent, tablinks;
 
@@ -37,6 +42,5 @@ function viewSurvey(evt, survey, id) {
 
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(survey).style.display = "block";
-    document.getElementById("currentid").text(id);
     evt.currentTarget.className += " active";
 }

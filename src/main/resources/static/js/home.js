@@ -1,13 +1,22 @@
-var ws;
-var currid;
+$(document).ready(function() {
+   updateOutput();
+   connect();
+});
 
-function connect(id) {
-    currid = "#" + id + "#"
+function updateOutput() {
+    $.post("update_home_list").done(function (fragment) {
+        $("#surveylist").replaceWith(fragment);
+    });
+}
+
+var ws;
+
+function connect() {
     var baseURL = window.location.origin
     ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
-        if (data.data.includes("CLOSE") && data.data.includes(currid)) {
-            location.reload();
+        if (data.data.includes("CLOSE")) {
+            updateOutput();
         }
     }
     //setConnected(true);
@@ -20,7 +29,3 @@ function disconnect() {
     //setConnected(false);
     console.log("Websocket is in disconnected state");
 }
-
-// function helloWorld(message) {
-//     $("#helloworldmessage").append(" " + message + "");
-// }
