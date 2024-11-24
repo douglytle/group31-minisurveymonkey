@@ -50,4 +50,16 @@ public class HomePageController {
         return "error";
     }
 
+    @RequestMapping(value="/update_home_list", method=RequestMethod.POST)
+    public String sendHtmlFragment(Model model) {
+        List<Survey> surveyList = new ArrayList<>();
+        Iterable<Survey> surveys = surveyRepository.findAll();
+        for (Survey s : surveys) {
+            surveyList.add(s);
+        }
+        model.addAttribute("surveys", surveyList);
+
+        return "fragments/surveylistfrag.html :: surveylist";
+    }
+
 }

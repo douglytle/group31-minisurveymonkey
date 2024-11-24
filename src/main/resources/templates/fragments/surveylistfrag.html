@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<tbody id="surveylist" th:fragment="surveylist">
+  <tr th:each="survey : ${surveys}" th:if="${survey.isActive()}">
+    <td th:text="${survey.id}"></td>
+    <td>
+      <a th:href="@{/{id}(id=${survey.id})}" th:text="${survey.name}"></a>
+    </td>
+  </tr>
+</tbody>
+</body>
+</html>
