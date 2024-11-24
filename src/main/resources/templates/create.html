@@ -1,10 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Survey</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".addMCQuestion").on("click", function () {
+                var $clone = $("ul.MCList").first().clone(true);
+                $clone.append("<button type='button' class='remove-row'>-</button>");
+                $clone.insertBefore(".addMCQuestion");
+                console.log("added MC question");
+            });
+
+            $(".addNRQuestion").click(function () {
+                var $clone = $("ul.NRList").first().clone(true);
+                $clone.append("<button type='button' class='remove-row'>-</button>");
+                $clone.insertBefore(".addNRQuestion");
+                console.log("added NR question");
+            });
+
+            $(".addOEQuestion").click(function () {
+                var $clone = $("ul.OEList").first().clone(true);
+                $clone.append("<button type='button' class='remove-row'>-</button>");
+                $clone.insertBefore(".addOEQuestion");
+                console.log("added OE question");
+            });
+
+            $(".addChoice").on("click", function () {
+                var $clone = $("li.choice").first().clone(true);
+                $clone.append("<button type='button' class='removeChoice'>-</button>");
+                $clone.insertBefore($(this));
+                console.log("added MC choice");
+            });
+
+            $(".createSurvey").on("click", ".remove-row", function () {
+                $(this).parent().remove();
+            });
+
+            $(".multipleChoice").on("click", ".removeChoice", function () {
+                $(this).parent().remove();
+            });
+
+            $('.submit').on("click", function () {
+                var formData = JSON.stringify($(".createSurvey").serializeArray());
+                console.log(formData);
+                var baseURL = window.location.origin;
+                $.ajax({
+                    type: 'POST',
+                    url: baseURL + "/createSurvey",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: formData
+                });
+                setTimeout(function () {
+                    window.location.href = baseURL;
+                }, 25);
+            });
+        });
+    </script>
 </head>
 <body>
-<p>This is the survey creation page</p>
+<h1>Create Survey</h1>
+
+<form class="createSurvey">
+        <p>Survey Name: <input type="text" name="surveyName"/> </p>
+    <p>Note: Any questions with blank question text will be excluded.</p>
+    <p>Order of questions is ascending, for example 1 will be the first question on the list, 2 will be the second, etc.</p>
+    <p>Multiple questions with the same order will be one after the other at random.</p>
+
+        <p>Multiple Choice Questions:</p>
+        <ul class="MCList" id="MCList">
+            <li>
+                <div class="multipleChoice" id="multipleChoice">
+                    <label>Question text: </label>
+                    <input type="text" class="MCQuestion" name="MCQuestion"><br>
+                    <label>Order on page: </label>
+                    <input type="number" class="MCOrder" name="MCOrder" value="0"><br>
+                    <p>List the choices:</p>
+                    <ul>
+                        <li class="choice">
+                            <label>Choice: </label>
+                            <input type="text" class="MCChoice" name="MCChoice"><br>
+                        </li>
+                    </ul>
+                    <button type="button" class="addChoice" id="addChoice">Add choice</button>
+                </div>
+            </li>
+        </ul>
+    <button type="button" class="addMCQuestion" name="addMCQuestion">Add Multiple Choice Question</button>
+
+    <p>Number Range Questions:</p>
+    <ul class="NRList" id="NRList">
+        <li>
+            <div class="numberRange" id="numberRange">
+                <label>Question text: </label>
+                <input type="text" class="NRQuestion" name="NRQuestion"><br>
+                <label>Order on page: </label>
+                <input type="number" class="NROrder" name="NROrder" value="0"><br>
+                <label>Minimum value: </label>
+                <input type="number" class="NRMin" name="NRMin" value="0"><br>
+                <label>Maximum value: </label>
+                <input type="number" class="NRMax" name="NRMax" value="0"><br>
+            </div>
+        </li>
+    </ul>
+    <button type="button" class="addNRQuestion" id="addNRQuestion">Add Number Range Question</button>
+
+    <p>Open Ended Questions:</p>
+    <ul class="OEList" id="OEList">
+        <li>
+            <div class="openEnded" id="openEnded">
+                <label>Question text: </label>
+                <input type="text" name="OEQuestion"><br>
+                <label>Order on page: </label>
+                <input type="number" class="OEOrder" name="OEOrder" value="0"><br>
+            </div>
+        </li>
+    </ul>
+    <button type="button" class="addOEQuestion" id="addOEQuestion">Add Open Ended Question</button>
+    <p><input type="button" value="Submit" class="submit"/></p>
+</form>
 </body>
 </html>
