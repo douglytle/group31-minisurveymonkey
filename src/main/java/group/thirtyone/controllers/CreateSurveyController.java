@@ -90,7 +90,8 @@ public class CreateSurveyController {
             survey.addQuestion(question);
         }
         user.addSurvey(survey);
-        surveyRepository.save(survey);
+        userAccountRepository.save(user);
+        //surveyRepository.save(survey);
         return "home";
     }
 }
