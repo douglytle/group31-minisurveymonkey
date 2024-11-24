@@ -9,17 +9,18 @@
         var questionCount = 3;
 
         $(document).ready(function(){
-            /*$( ".addMCQuestion" ).click(function(){
+            $( ".addMCQuestion" ).click(function(){
                 var $clone = $( "ul.MCList" ).first().clone();
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
                 $clone.insertBefore( ".addMCQuestion" );
                 console.log("added MC question");
                 questionCount++;
-            });*/
+            });
 
             $( ".addNRQuestion" ).click(function(){
                 var $clone = $( "ul.NRList" ).first().clone();
                 $clone.append( "<button type='button' class='remove-row'>-</button>" );
+                $clone.insertBefore( ".addNRQuestion" );
                 console.log("added NR question");
                 questionCount++;
             });
@@ -41,11 +42,24 @@
 
             $( ".createSurvey" ).on("click", ".remove-row", function(){
                 $(this).parent().remove();
-                questionCount--;
             });
 
             $( ".multipleChoice" ).on("click", ".removeChoice", function(){
                 $(this).parent().remove();
+            });
+
+            $('.submit').on("click", function() {
+                var formData = JSON.stringify($(".createSurvey").serializeArray());
+                console.log(formData);
+                $.ajax({
+                    type: 'POST',
+                    url: "createSurvey",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: formData
+                });
+                var baseURL = window.location.origin;
+                window.location.href = baseURL;
             });
         });
     </script>
@@ -53,41 +67,40 @@
 <body>
 <h1>Create Survey</h1>
 
-<form class="createSurvey" th:object="${survey}" action="/create" method="post">
-        <p>Survey Name: <input type="text" th:field="*{name}" /> </p>
+<form class="createSurvey">
+        <p>Survey Name: <input type="text" name="surveyName"/> </p>
 
         <p>Multiple Choice Questions:</p>
-        <ul th:each="MCQuestion: ${MCQuestions}" class="MCList" id="MCList" th:object="${MCQuestions}">
+        <ul class="MCList" id="MCList">
             <li>
                 <div class="multipleChoice" id="multipleChoice">
                     <label>Question text 1: </label>
-                    <input type="text" th:value="${MCQuestion.question}"><br>
+                    <input type="text" class="MCQuestion" name="MCQuestion"><br>
                     <p>List the choices (please note the first two are mandatory, they have been marked for your convenience):</p>
-                    <ul th:each="MCChoice: ${MCQuestion.getChoices()}">
+                    <ul>
                         <li class="choice">
                             <label>Choice: </label>
-                            <input type="text" th:value="|${MCChoice}|"><br>
+                            <input type="text" class="MCChoice" name="MCChoice"><br>
                         </li>
                     </ul>
-
                     <button type="button" class="addChoice" id="addChoice">+</button>
 
                     <label>Order on page: WIP</label>
                 </div>
             </li>
         </ul>
-    <button type="submit" class="addMCQuestion" id="addMCQuestion" name="addMCQuestion">+</button>
+    <button type="button" class="addMCQuestion" name="addMCQuestion">+</button>
 
     <p>Number Range Questions:</p>
-    <ul th:each="NRQuestion: ${NRQuestions}" class="NRList" id="NRList">
+    <ul class="NRList" id="NRList">
         <li>
             <div class="numberRange" id="numberRange">
                 <label>Question text 2: </label>
-                <input type="text" th:value="|${NRQuestion.getQuestion()}|"><br>
+                <input type="text" class="NRQuestion" name="NRQuestion"><br>
                 <label>Minimum value: </label>
-                <input type="text" th:value="|${NRQuestion.getMin()}|"><br>
+                <input type="number" class="NRMin" name="NRMin"><br>
                 <label>Maximum value: </label>
-                <input type="text" th:value="|${NRQuestion.getMax()}|"><br>
+                <input type="number" class="NRMax" name="NRMax"><br>
                 <label>Order on page: WIP</label>
             </div>
         </li>
@@ -95,17 +108,17 @@
     <button type="button" class="addNRQuestion" id="addNRQuestion">+</button>
 
     <p>Open Ended Questions:</p>
-    <ul th:each="OEQuestion: ${OEQuestions}" class="OEList" id="OEList">
+    <ul class="OEList" id="OEList">
         <li>
             <div class="openEnded" id="openEnded">
                 <label>Question text 3: </label>
-                <input type="text" th:name="|OEQuestion.question|" th:text="|${OEQuestion.question}|"><br>
+                <input type="text" name="OEQuestion"><br>
                 <label>Order on page: WIP</label>
             </div>
         </li>
     </ul>
     <button type="button" class="addOEQuestion" id="addOEQuestion">+</button>
-    <p><input type="submit" value="Submit" /></p>
+    <p><input type="button" value="Submit" class="submit"/></p>
 </form>
 </body>
 </html>

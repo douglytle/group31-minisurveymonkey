@@ -20,54 +20,53 @@ public class CreateSurveyController {
 
     @GetMapping("/create")
     public String createSurvey(Model model) {
-        Survey survey = new Survey();
-
-        List<MultipleChoice> MCQuestions = new ArrayList<>();
-
-        MultipleChoice multipleChoice = new MultipleChoice();
-        multipleChoice.setQuestion("");
-        multipleChoice.addChoice("");
-        multipleChoice.addChoice("");
-        MCQuestions.add(multipleChoice);
-
-        List<OpenEnded> OEQuestions = new ArrayList<>();
-
-        OpenEnded openEnded = new OpenEnded();
-        openEnded.setQuestion("");
-        OEQuestions.add(openEnded);
-
-        List<NumberRange> NRQuestions = new ArrayList<>();
-
-        NumberRange numberRange = new NumberRange();
-        numberRange.setQuestion("");
-        NRQuestions.add(numberRange);
-
-        model.addAttribute("NRQuestions", NRQuestions);
-        model.addAttribute("OEQuestions", OEQuestions);
-        model.addAttribute("MCQuestions", MCQuestions);
-        model.addAttribute("survey", survey);
         return "create";
     }
 
-    @PostMapping("/create")
-    public String createSurveySubmit(@ModelAttribute Survey survey, @ModelAttribute ArrayList<MultipleChoice> MCList, @ModelAttribute ArrayList<OpenEnded> OEList, @ModelAttribute ArrayList<NumberRange> NRList, Model model) {
+    @PostMapping("/createSurvey")
+    @CrossOrigin
+    public String createSurveySubmit(@RequestBody String surveyJSON) {
         System.out.println("Create Survey Submitted");
-        survey.setMultipleChoiceQuestions(MCList);
-        survey.setOpenEndedQuestions(OEList);
-        survey.setNumberRangeQuestions(NRList);
+        System.out.println(surveyJSON);
+
+        Survey survey = new Survey();
+
+        String stripped = surveyJSON.replace("{","");
+        stripped = stripped.replace("}","");
+        stripped = stripped.replace("[","");
+        stripped = stripped.replace("]","");
+        stripped = stripped.replace("\"","");
+        String[] values = stripped.split(",");
+
+        for(int i = 0; i < values.length; i+=2){
+            if(values[i].equals("name:surveyName")) {
+                survey.setName(values[i+1].replace("value:", ""));
+            }
+            if(values[i].equals("name:OEQuestion")) {
+                OpenEnded oe = new OpenEnded();
+                oe.setQuestion(values[i+1].replace("value:", ""));
+                survey.addQuestion(oe);
+            }
+            if(values[i].equals("name:NRQuestion")) {
+                NumberRange nr = new NumberRange();
+                nr.setQuestion(values[i+1].replace("value:", ""));
+                nr.setMin(Integer.parseInt(values[i+3].replace("value:", "")));
+                nr.setMax(Integer.parseInt(values[i+5].replace("value:", "")));
+                survey.addQuestion(nr);
+                i+=4;
+            }
+            if(values[i].equals("name:MCQuestion")) {
+                MultipleChoice mc = new MultipleChoice();
+                mc.setQuestion(values[i+1].replace("value:", ""));
+                while(values[i+2].equals("name:MCChoice")) {
+                    mc.addChoice(values[i+3].replace("value:", ""));
+                    i+=2;
+                }
+                survey.addQuestion(mc);
+            }
+        }
         surveyRepository.save(survey);
-        System.out.println("Survey Saved");
 
-        for(Question question : survey.getQuestions()) {
-            System.out.println(question);
-        }
-
-        List<Survey> surveyList = new ArrayList<>();
-        Iterable<Survey> surveys = surveyRepository.findAll();
-        for (Survey s : surveys) {
-            surveyList.add(s);
-        }
-        model.addAttribute("surveys", surveyList);
         return "home";
     }
 
@@ -112,5 +111,30 @@ public class CreateSurveyController {
         OEList.add(openEnded);
         model.addAttribute("OEQuestions", OEList);
         return "create";
+    }
+
+    @PostMapping("/create2")
+    public String createSurveySubmit2(@RequestBody String json, @ModelAttribute(name="surveyName") String surveyName, Model model) {
+        System.out.println("Create Survey Submitted");
+        Survey survey = new Survey();
+        survey.setName(surveyName);
+        System.out.println("Name: " + survey.getName());
+        /*for(Question question : questions) {
+            survey.addQuestion(question);
+        }*/
+        surveyRepository.save(survey);
+        System.out.println("Survey Saved");
+
+        for(Question question : survey.getQuestions()) {
+            System.out.println(question);
+        }
+
+        List<Survey> surveyList = new ArrayList<>();
+        Iterable<Survey> surveys = surveyRepository.findAll();
+        for (Survey s : surveys) {
+            surveyList.add(s);
+        }
+        model.addAttribute("surveys", surveyList);
+        return "home";
     }
 }
