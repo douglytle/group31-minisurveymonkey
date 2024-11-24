@@ -1,7 +1,6 @@
 package group.thirtyone.controllers;
 
 import group.thirtyone.othercomponents.UserAccount;
-import group.thirtyone.persistencerepositories.SurveyRepository;
 import group.thirtyone.persistencerepositories.UserAccountRepository;
 import group.thirtyone.surveycomponents.*;
 import jakarta.servlet.http.HttpSession;
@@ -14,11 +13,9 @@ import java.util.*;
 @Controller
 public class CreateSurveyController {
 
-    private final SurveyRepository surveyRepository;
     private final UserAccountRepository userAccountRepository;
 
-    public CreateSurveyController(SurveyRepository surveyRepository, UserAccountRepository userAccountRepository) {
-        this.surveyRepository = surveyRepository;
+    public CreateSurveyController(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
     }
 
@@ -91,7 +88,6 @@ public class CreateSurveyController {
         }
         user.addSurvey(survey);
         userAccountRepository.save(user);
-        //surveyRepository.save(survey);
         return "home";
     }
 }
