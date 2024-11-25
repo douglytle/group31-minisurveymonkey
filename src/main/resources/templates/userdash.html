@@ -22,7 +22,13 @@
 </div>
 
 <div class="vtab">
-    <button th:each="survey,iter : ${surveys}" th:id="surveyclass+${survey.getId()}" class="vtablinks" th:data-name="${survey.name}" th:data-id="${survey.getId()}" th:onclick="viewSurvey(event, this.getAttribute('data-name'), this.getAttribute('data-id'))" th:text="${survey.name}"></button>
+    <button th:each="survey,iter : ${surveys}"
+            th:id="surveyclass+${survey.getId()}"
+            class="vtablinks"
+            th:data-name="${survey.name}"
+            th:data-id="${survey.getId()}"
+            th:onclick="|viewSurvey(event, this.getAttribute('data-name'), this.getAttribute('data-id')); document.getElementById('defaultOpen${survey.getId()}').click()|"
+            th:text="${survey.name}"></button>
 </div>
 
 <script>
@@ -40,7 +46,9 @@
 
     <script>
         // Get the element with id="defaultOpen" and click on it
-        document.getElementById("[[defaultOpen + ${survey.getId()}]]").click();
+        $(document).ready(function(){
+            document.getElementById("[[defaultOpen + ${survey.getId()}]]").click();
+            });
     </script>
 
     <!-- Horizontal Tab content -->
@@ -141,9 +149,11 @@
     </div>
 </div>
 
-<script>
+<script th:if="${surveys.size() > 0}">
     // Get the element with id="defaultOpen" and click on it
-    document.getElementById("[[surveyclass + ${surveys.get(0).getId()}]]").click();
+    $(document).ready(function(){
+        document.getElementById("[[surveyclass + ${surveys.get(0).getId()}]]").click();
+    });
 </script>
 
 </body>
