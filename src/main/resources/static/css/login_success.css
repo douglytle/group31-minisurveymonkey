@@ -1,0 +1,23 @@
+/* Center Align Container */
+div.container {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: 50%;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+div.container a {
+    display: block;
+    margin-top: 20px;
+    color: #3498db; /* Bright Blue */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div.container a:hover {
+    text-decoration: underline;
+}

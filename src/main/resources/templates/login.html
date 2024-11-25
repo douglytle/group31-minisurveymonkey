@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Login to MiniSurveyMonkey</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script>
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById("password");
+            const toggleButton = document.getElementById("togglePassword");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.textContent = "Hide password";
+            } else {
+                passwordField.type = "password";
+                toggleButton.textContent = "Show password";
+            }
+        }
+    </script>
 </head>
 <body>
 <form method="POST" action="#" th:action="@{/login}" th:object="${userInfo}">
@@ -12,11 +26,14 @@
         <input type="text" id="username" name="username" th:field="*{username}">
         <br><br>
         <label for="password">Password</label>
-        <input type="text" id="password" name="password" th:field="*{password}">
+        <input type="password" id="password" name="password" th:field="*{password}">
+        <button type="button" id="togglePassword" onclick="togglePasswordVisibility()">Show password</button>
         <br><br>
-        <button type="submit">Submit</button>
+        <div class="form-actions">
+            <a href="/" class="back-button">Back</a>
+            <button type="submit">Submit</button>
+        </div>
     </fieldset>
 </form>
-<a href="/">Back to Home page</a>
 </body>
 </html>

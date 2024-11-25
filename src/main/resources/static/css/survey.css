@@ -1,0 +1,126 @@
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc; /* Light background */
+    color: #333; /* Dark gray text */
+    line-height: 1.6;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Back to List Link */
+a {
+    color: #3498db; /* Bright Blue */
+    text-decoration: none;
+    font-size: 18px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Survey Title */
+h1 {
+    text-align: center;
+    color: #2c3e50; /* Dark blue-gray */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+/* Survey Name */
+p:first-of-type {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #34495e; /* Navy Blue */
+    margin-bottom: 10px;
+}
+
+/* Question Styling */
+form .surveySubmission {
+    margin-top: 20px;
+}
+
+form p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50; /* Dark blue-gray */
+    margin-bottom: 10px;
+}
+
+form ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+form ul li {
+    margin: 5px 0;
+}
+
+form ul li input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Slider Styling */
+.slidecontainer {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+input[type="range"].slider {
+    -webkit-appearance: none;
+    width: 50%; /* Adjust the slider width */
+    max-width: 300px; /* Maximum width for larger screens */
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    border-radius: 5px;
+    transition: background 0.2s ease-in-out;
+}
+
+input[type="range"].slider:hover {
+    background: #3498db; /* Bright Blue */
+}
+
+input[type="range"].slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #1abc9c; /* Light Green */
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+input[type="range"].slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #1abc9c; /* Light Green */
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+output {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #34495e; /* Navy Blue */
+}
+
+/* Submit Button */
+input.survey-submit {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #1abc9c; /* Light Green */
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+input.survey-submit:hover {
+    background-color: #16a085; /* Slightly darker green */
+}

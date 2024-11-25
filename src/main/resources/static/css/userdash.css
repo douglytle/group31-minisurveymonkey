@@ -1,0 +1,118 @@
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc; /* Light background */
+    color: #333; /* Text color */
+    margin: 0;
+    padding: 20px;
+}
+
+/* User Info (Logged-In Message) */
+div.user-info {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #ecf0f1; /* Light Gray */
+    color: #2c3e50; /* Dark Blue */
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+}
+
+/* Vertical Tabs */
+.vtab {
+    float: left;
+    width: 15%;
+    height: 100vh; /* Full height */
+    background-color: #2c3e50; /* Dark Blue */
+    border-right: 2px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.vtab button {
+    display: block;
+    background-color: inherit;
+    color: #ecf0f1; /* Light Gray */
+    padding: 15px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1em;
+}
+
+.vtab button:hover {
+    background-color: #34495e; /* Slightly lighter blue */
+    color: #1abc9c; /* Light Green */
+}
+
+.vtab button:focus {
+    outline: none;
+    background-color: #1abc9c; /* Active tab */
+    color: #fff;
+}
+
+/* Tab Content */
+.vtabcontent {
+    float: left;
+    width: 75%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff; /* White */
+    border-left: 2px solid #ddd;
+    display: none;
+    margin-left: 5%;
+}
+
+.vtabcontent.active {
+    display: block;
+}
+
+/* Horizontal Tabs */
+.htab {
+    margin-bottom: 20px;
+    display: flex;
+    border-bottom: 2px solid #ddd;
+}
+
+.htab button {
+    background-color: #ecf0f1; /* Light Gray */
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: 0.3s;
+    color: #2c3e50; /* Dark blue-gray */
+    font-size: 1em;
+    margin-right: 5px;
+}
+
+.htab button:hover {
+    background-color: #3498db; /* Bright Blue */
+    color: white;
+}
+
+.htab button:focus {
+    outline: none;
+    background-color: #1abc9c; /* Active tab */
+    color: white;
+}
+
+/* Graph Containers */
+div[id^="mcqchart"], div[id^="nrchart"] {
+    background-color: #ffffff; /* Light background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px;
+    width: 90%;
+}
+
+div[id^="mcqchart"] h3, div[id^="nrchart"] h3 {
+    font-size: 1.2em;
+    color: #2c3e50; /* Dark blue-gray */
+    margin-bottom: 10px;
+}
