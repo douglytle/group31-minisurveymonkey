@@ -16,10 +16,27 @@
 
 <script>
     connect("[[${survey.getId()}]]");
+    $(document).ready(function () {
+        $('.survey-submit').on("click", function () {
+            var formData = JSON.stringify($(".surveySubmission").serializeArray());
+            var baseURL = window.location.origin;
+            $.ajax({
+                type: 'POST',
+                url: baseURL + "/submitSurvey",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: formData
+            });
+            setTimeout(function () {
+                window.location.href = baseURL;
+            }, 300);
+        });
+    });
 </script>
 
 
 <form class="surveySubmission">
+    <input type="hidden" name="id" th:value="${survey.getId()}" />
     <div th:each="question,iter : ${survey.getQuestions()}">
         <div th:switch="${question.getType()}">
             <div th:case="MCQ">
@@ -33,12 +50,12 @@
             </div>
             <div th:case="OE">
                 <p th:text="${question.getQuestion()}"/>
-                <input type="text" name="openEnded-answer"/>
+                <input type="text" th:name="oe- + ${question.getId()}">
             </div>
             <div th:case="NR">
                 <p th:text="${question.getQuestion()}"/>
                 <div class="slidecontainer">
-                    <input type="range" th:min="${question.getMin()}" th:max="${question.getMax()}" th:value="${question.getMin()}" class="slider" oninput="this.nextElementSibling.value = this.value">
+                    <input type="range" th:name="nr- + ${question.getId()}" th:min="${question.getMin()}" th:max="${question.getMax()}" th:value="${question.getMin()}" class="slider" oninput="this.nextElementSibling.value = this.value">
                     <output th:text="${question.getMin()}"></output>
                 </div>
             </div>

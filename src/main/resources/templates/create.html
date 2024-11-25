@@ -10,28 +10,24 @@
                 var $clone = $("ul.MCList").first().clone(true);
                 $clone.append("<button type='button' class='remove-row'>-</button>");
                 $clone.insertBefore(".addMCQuestion");
-                console.log("added MC question");
             });
 
             $(".addNRQuestion").click(function () {
                 var $clone = $("ul.NRList").first().clone(true);
                 $clone.append("<button type='button' class='remove-row'>-</button>");
                 $clone.insertBefore(".addNRQuestion");
-                console.log("added NR question");
             });
 
             $(".addOEQuestion").click(function () {
                 var $clone = $("ul.OEList").first().clone(true);
                 $clone.append("<button type='button' class='remove-row'>-</button>");
                 $clone.insertBefore(".addOEQuestion");
-                console.log("added OE question");
             });
 
             $(".addChoice").on("click", function () {
                 var $clone = $("li.choice").first().clone(true);
                 $clone.append("<button type='button' class='removeChoice'>-</button>");
                 $clone.insertBefore($(this));
-                console.log("added MC choice");
             });
 
             $(".createSurvey").on("click", ".remove-row", function () {
@@ -44,7 +40,6 @@
 
             $('.submit').on("click", function () {
                 var formData = JSON.stringify($(".createSurvey").serializeArray());
-                console.log(formData);
                 var baseURL = window.location.origin;
                 $.ajax({
                     type: 'POST',
