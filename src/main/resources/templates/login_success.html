@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Logged In</title>
+    <link rel="stylesheet" href="/css/login_success.css">
 </head>
 <body>
-<h2>Successfully logged in</h2>
-<h3>Username of account logged in to:</h3>
-<p th:text="${userInfo.username}"></p>
-<br>
-<a href="/">Back to Home page</a>
+<div class="container">
+    <h2>Successfully Logged In</h2>
+    <h3>Username of Account:</h3>
+    <p th:text="${userInfo.username}"></p>
+    <br>
+    <a href="/">Back to Home Page</a>
+</div>
 </body>
 </html>

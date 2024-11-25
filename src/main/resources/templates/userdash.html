@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Survey Results</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link th:href="@{/css/results.css}" rel="stylesheet" />
+    <link th:href="@{/css/userdash.css}" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
     <script type="text/javascript" th:src="@{/js/results.js}"></script>
     <script type="text/javascript" th:src="@{/js/userdash.js}"></script>
@@ -13,11 +13,17 @@
 </head>
 <body>
 
+<div class="user-info">
+    You are currently logged in as: <span th:text="${username}"></span>.
+    <br>
+    <a href="/">
+        <button>Back</button>
+    </a>
+</div>
+
 <div class="vtab">
     <button th:each="survey,iter : ${surveys}" th:id="surveyclass+${survey.getId()}" class="vtablinks" th:data-name="${survey.name}" th:data-id="${survey.getId()}" th:onclick="viewSurvey(event, this.getAttribute('data-name'), this.getAttribute('data-id'))" th:text="${survey.name}"></button>
 </div>
-
-<p id="currentid" hidden></p>
 
 <script>
     // Get the element with id="defaultOpen" and click on it
@@ -139,14 +145,6 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("[[surveyclass + ${surveys.get(0).getId()}]]").click();
 </script>
-
-<div style="float:right;">
-    <p th:if="${username}">You are currently logged in as: <span th:text="${username}"></span>.</p>
-    <a href="/">
-        <button>Back</button>
-    </a>
-
-</div>
 
 </body>
 </html>
