@@ -29,10 +29,11 @@
         <input type="password" id="password" name="password" th:field="*{password}">
         <button type="button" id="togglePassword" onclick="togglePasswordVisibility()">Show password</button>
         <br><br>
-        <button type="submit">Submit</button>
+        <div class="form-actions">
+            <a href="/" class="back-button">Back</a>
+            <button type="submit">Submit</button>
+        </div>
     </fieldset>
 </form>
-<br>
-<a href="/" class="home-button">Back to Home page</a>
 </body>
 </html>

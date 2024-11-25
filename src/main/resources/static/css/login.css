@@ -67,7 +67,33 @@ button#togglePassword:hover {
     color: white;
 }
 
-/* Submit Button */
+/* Submit and Back Buttons */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+a.back-button {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #3498db; /* Bright Blue */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+a.back-button:hover {
+    background-color: #2980b9; /* Darker Blue */
+    color: white;
+}
+
 form button[type="submit"] {
     background-color: #1abc9c; /* Light Green */
     color: white;
@@ -81,26 +107,4 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
     background-color: #16a085; /* Slightly darker green */
-}
-
-/* Back to Home Button */
-a.home-button {
-    display: inline-block;
-    text-align: center;
-    padding: 10px 20px;
-    background-color: #3498db; /* Bright Blue */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-a.home-button:hover {
-    background-color: #2980b9; /* Darker Blue */
-    color: white;
 }
