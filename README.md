@@ -2,11 +2,15 @@
 
 ## Status of Project
 Currently, the web application pulls stored surveys from the backend database and then displays a list of them in
-the homepage. A user can click on one of the surveys and then display the survey. Survey answer submission and 
-survey creation currently does not work.
+the homepage. A user can click on one of the surveys and then display the survey. A user can create an account, and log 
+in to the created account. A registered user gets access to a dashboard which lists their created surveys, and the
+current results of the survey (at the time of opening the page). A registered user can create a survey, which adds it to
+the survey list and the dashboard list. Some websocket-based features were added, primarily the automatic closure of open
+survey sessions if the creator of a survey closes the survey from their dashboard. The home page also updates its survey
+list if a survey's status updates.
 
-For the next sprint (Nov 11 - Nov 25) survey creation and answer submission should be fixed, and th issues assigned 
-to Milestone 2 (#8, #9, #10, #11) will be implemented
+For the next sprint (Nov 25 - December 6) survey submission will be finalized, and more websocket-based features will be
+added (#9). Styling of pages will also be finished.
 
 ## Build and Deploy Statuses
 [![Build Status (Java CI With Maven)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/maven.yml/badge.svg)](https://github.com/douglytle/group31-minisurveymonkey/actions/workflows/maven.yml)
