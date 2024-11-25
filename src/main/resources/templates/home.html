@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8" >
     <title>Mini Surveymonkey Home Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/home.js}"></script>
     <link th:href="@{/css/home.css}" rel="stylesheet" />
 </head>
 <body>
@@ -39,13 +41,7 @@
             <th>Link</th>
         </tr>
     </thead>
-    <tbody>
-        <tr th:each="survey : ${surveys}">
-            <td th:text="${survey.id}"></td>
-            <td>
-                <a th:href="@{/{id}(id=${survey.id})}" th:text="${survey.name}"></a>
-            </td>
-        </tr>
+    <tbody id="surveylist">
     </tbody>
 </table>
 <br><br>

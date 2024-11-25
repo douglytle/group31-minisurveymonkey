@@ -1,4 +1,9 @@
+window.onerror = function(message, url, lineNumber) {
+    return true; // prevents browser error messages
+}; //hide null errors that always appear on page load (does not affect functionality)
+
 function viewQuestion(evt, questionType) {
+    if (!questionType) return;
     // Declare all variables
     let i, tabcontent, tablinks;
 
@@ -19,11 +24,9 @@ function viewQuestion(evt, questionType) {
     evt.currentTarget.className += " active";
 }
 
-function viewSurvey(evt, survey) {
+function viewSurvey(evt, survey, id) {
     // Declare all variables
     var i, tabcontent, tablinks;
-
-    console.log(survey)
 
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("vtabcontent");

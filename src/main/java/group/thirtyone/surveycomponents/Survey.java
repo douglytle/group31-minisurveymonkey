@@ -23,6 +23,8 @@ public class Survey {
 
     private String name;
 
+    private boolean active;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<MultipleChoice> multipleChoiceQuestions;
 
@@ -39,6 +41,7 @@ public class Survey {
         multipleChoiceQuestions = new ArrayList<>();
         numberRangeQuestions = new ArrayList<>();
         openEndedQuestions = new ArrayList<>();
+        active = true;
     }
 
     /**
@@ -109,7 +112,29 @@ public class Survey {
         this.name = name;
     }
 
+    public void setMultipleChoiceQuestions(List<MultipleChoice> multipleChoiceQuestions) {
+        this.multipleChoiceQuestions = multipleChoiceQuestions;
+    }
+
+    public void setNumberRangeQuestions(List<NumberRange> numberRangeQuestions) {
+        this.numberRangeQuestions = numberRangeQuestions;
+    }
+
+    public void setOpenEndedQuestions(List<OpenEnded> openEndedQuestions) {
+        this.openEndedQuestions = openEndedQuestions;
+    }
+  
     public Long getId() {
         return this.id;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void close()
+    {
+        active = false;
+    }
+
 }
