@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <title>Survey Results</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link th:href="@{/css/results.css}" rel="stylesheet" />
+    <link th:href="@{/css/userdash.css}" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
     <script type="text/javascript" th:src="@{/js/results.js}"></script>
     <script type="text/javascript" th:src="@{/js/userdash.js}"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <link rel="stylesheet" href="/css/userdash.css">
 </head>
 <body>
 
 <div class="user-info">
     You are currently logged in as: <span th:text="${username}"></span>.
+    <br>
     <a href="/">
         <button>Back</button>
     </a>
