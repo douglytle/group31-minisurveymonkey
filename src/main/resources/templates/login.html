@@ -10,10 +10,10 @@
             const toggleButton = document.getElementById("togglePassword");
             if (passwordField.type === "password") {
                 passwordField.type = "text";
-                toggleButton.textContent = "Hide";
+                toggleButton.textContent = "Hide password";
             } else {
                 passwordField.type = "password";
-                toggleButton.textContent = "Show";
+                toggleButton.textContent = "Show password";
             }
         }
     </script>
@@ -32,6 +32,7 @@
         <button type="submit">Submit</button>
     </fieldset>
 </form>
-<a href="/">Back to Home page</a>
+<br>
+<a href="/" class="home-button">Back to Home page</a>
 </body>
 </html>
