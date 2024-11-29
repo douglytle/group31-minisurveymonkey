@@ -144,7 +144,7 @@
 
         <div>
         <h3>Danger</h3>
-            <button id="close" th:onclick="|sendData('This is a test message!!', '${survey.getId()}')|">Close Survey</button>
+            <button id="close" th:onclick="|closeSurvey('${survey.getId()}')|">Close Survey</button>
         </div>
     </div>
 </div>

@@ -16,16 +16,15 @@ function connect() {
     ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
         if (data.data.includes("CLOSE")) {
+            console.log(data.data)
             updateOutput();
         }
     }
-    //setConnected(true);
 }
 
 function disconnect() {
     if (ws != null) {
         ws.close();
     }
-    //setConnected(false);
     console.log("Websocket is in disconnected state");
 }

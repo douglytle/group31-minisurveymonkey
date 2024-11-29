@@ -45,6 +45,7 @@ public class SocketTextHandler extends TextWebSocketHandler {
                 closeSurvey(jsonObject.get("id").toString());
                 msgtoSend = "CLOSE #" + jsonObject.get("id").toString() + "#";
                 break;
+            // other cases...
         }
 
         for (WebSocketSession webSocketSession : sessions) {

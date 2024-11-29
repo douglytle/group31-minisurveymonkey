@@ -7,20 +7,14 @@ function connect(id) {
     ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
         if (data.data.includes("CLOSE") && data.data.includes(currid)) {
+            console.log(data.data)
             location.reload();
         }
     }
-    //setConnected(true);
 }
 
 function disconnect() {
     if (ws != null) {
         ws.close();
     }
-    //setConnected(false);
-    console.log("Websocket is in disconnected state");
 }
-
-// function helloWorld(message) {
-//     $("#helloworldmessage").append(" " + message + "");
-// }
