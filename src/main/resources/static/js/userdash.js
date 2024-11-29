@@ -14,7 +14,7 @@ function disconnect() {
     }
 }
 
-function closeSurvey(message, id) {
+function closeSurvey(id) {
     var data = JSON.stringify({
         'type': "CLOSE_SURVEY",
         'id': id

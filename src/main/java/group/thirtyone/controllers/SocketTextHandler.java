@@ -41,7 +41,6 @@ public class SocketTextHandler extends TextWebSocketHandler {
         String msgtoSend = "";
         switch (jsonObject.get("type").toString()) {
             case "CLOSE_SURVEY":
-                System.out.println("Closing survey");
                 closeSurvey(jsonObject.get("id").toString());
                 msgtoSend = "CLOSE #" + jsonObject.get("id").toString() + "#";
                 break;
