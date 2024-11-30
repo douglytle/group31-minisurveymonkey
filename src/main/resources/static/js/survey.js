@@ -7,7 +7,6 @@ function connect(id) {
     ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
         if (data.data.includes("CLOSE") && data.data.includes(currid)) {
-            console.log(data.data)
             location.reload();
         }
     }

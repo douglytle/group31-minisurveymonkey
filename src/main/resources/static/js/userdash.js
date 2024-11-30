@@ -4,7 +4,6 @@ function connect() {
     var baseURL = window.location.origin
     ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
-        console.log(data.data)
     }
 }
 

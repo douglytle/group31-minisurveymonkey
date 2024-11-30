@@ -16,7 +16,6 @@ function connect() {
     ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
         if (data.data.includes("CLOSE")) {
-            console.log(data.data)
             updateOutput();
         }
     }

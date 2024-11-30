@@ -150,7 +150,7 @@
 </div>
 
 <script th:if="${surveys.size() > 0}">
-    // Get the element with id="defaultOpen" and click on it
+    // Get the element with id="surveyclass(id)" and click on it
     $(document).ready(function(){
         document.getElementById("[[surveyclass + ${surveys.get(0).getId()}]]").click();
     });
