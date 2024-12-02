@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Failed to Create Account</title>
+    <link th:href="@{/css/create_account_failure.css}" rel="stylesheet" />
 </head>
 <body>
-<h2>Failed to Create User Account</h2>
-<p>Probable cause is an account already existed with that username</p>
-<br>
-<a href="/create_account">Click here to return to the account creation page</a>
-<br>
-<a href="/">Click here to return to the home page</a>
+<div class="container">
+    <h2>Failed to Create User Account</h2>
+    <p>Probable cause: an account already exists with that username.</p>
+    <div class="actions">
+        <a href="/create_account" class="button">Return to Account Creation</a>
+        <a href="/" class="button">Return to Home Page</a>
+    </div>
+</div>
 </body>
 </html>

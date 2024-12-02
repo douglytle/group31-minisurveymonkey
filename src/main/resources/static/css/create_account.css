@@ -1,0 +1,108 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc; /* Light background */
+    color: #2c3e50; /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Main Container */
+.container {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 30px 40px;
+    width: 450px;
+    text-align: center;
+}
+
+/* Page Title */
+h2 {
+    color: #1abc9c; /* Light green */
+    margin-bottom: 15px;
+}
+
+/* Warning Text */
+.warning {
+    color: #e74c3c; /* Warning red */
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* Links Styling */
+a {
+    color: #3498db; /* Bright Blue */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styling */
+form {
+    margin-top: 20px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+legend {
+    color: #3498db; /* Blue */
+    font-weight: bold;
+}
+
+label {
+    font-weight: bold;
+    color: #34495e; /* Dark blue-gray */
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: #1abc9c; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #16a085; /* Darker green */
+}
+
+/* Back Link */
+.back-link {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #3498db; /* Bright Blue */
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

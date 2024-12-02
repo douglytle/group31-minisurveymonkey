@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Log In Failed</title>
-    <link rel="stylesheet" href="/css/login_failure.css">
+    <link rel="stylesheet" href="/css/create_account.css">
 </head>
 <body>
-<h2>Failed to Log in to Account</h2>
-<p>Probable cause is wrong username or password</p>
-<br>
-<a href="/login">Click here to return to the login page</a>
-<br>
-<a href="/">Click here to return to the home page</a>
+<div class="container">
+    <h2>User Account Creation Page</h2>
+    <p class="warning">
+        <strong>IMPORTANT NOTE:</strong> There is absolutely NO security or encryption being used here. Username/password combos are stored in plaintext. Do not use anything you don't want open to the internet.
+    </p>
+    <p>Already have an account? <a href="/login">Log in here</a>.</p>
+
+    <form method="POST" action="#" th:action="@{/create_account}" th:object="${userAccount}">
+        <fieldset>
+            <legend>Create New User Account</legend>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" th:field="*{username}">
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" th:field="*{password}">
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+
+    <a href="/" class="back-link">Back to Home Page</a>
+</div>
 </body>
 </html>
