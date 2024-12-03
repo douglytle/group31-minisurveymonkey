@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <link th:href="@{/css/userdash.css}" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <div id="survey_questions" th:fragment="survey_questions(current_active)">
+
+        <!-- Horizontal Tab content -->
+        <div th:id="OpenEnded+${survey.getId()}" class="htabcontent" style="display: none;">
+            <h3>Open Ended Responses</h3>
+            <div th:each="openended,iter : ${openendeds}">
+                <h4 th:text="${openended.getQuestion()}"/>
+                <div th:each="answer,iter : ${openended.getAnswers()}">
+                    <p th:text="${answer}"/>
+                </div>
+            </div>
+        </div>
+
+        <div th:id="MultipleChoice+${survey.getId()}" class="htabcontent" style="display: none;">
+            <h3>Multiple Choice Responses</h3>
+            <div th:each="mcq,iter : ${multiplechoices}">
+                <div th:id="mcqchart + ${mcq.getId()}" style="width: 40%; height: 400px; display: block;">
+                    <script th:inline="javascript">
+                        $(document).ready(function () {
+                            /*[+
+                            let [(mcqmap + ${mcq.getId()})] = [[${mcqmaplist.get(iter.index)}]];
+                            +]*/
+                            /*[+
+                        let [(dataPoints + ${mcq.getId()})] = [];
+                        +]*/
+                            for (mcqm in /*[(mcqmap + ${mcq.getId()})]*/) {
+                                /*[+[(dataPoints + ${mcq.getId()})]+]*/.push({
+                                    'label': mcqm,
+                                    'y': /*[+[(mcqmap + ${mcq.getId()})][mcqm]+]*/
+                                })
+                            }
+
+                            var /*[+[(choiceChart + ${mcq.getId()})]+]*/ =
+                            new CanvasJS.Chart( /*[[mcqchart + ${mcq.getId()}]]*/, {
+                                animationEnabled: true,
+                                title: {text: /*[[${mcq.getQuestion()}]]*/},
+                                data: [{
+                                    type: "pie",
+                                    startAngle: 240,
+                                    indexLabel: "{label} {y}",
+                                    dataPoints: /*[(dataPoints + ${mcq.getId()})]*/
+                                }]
+                            })
+
+                                /*[+[(choiceChart + ${mcq.getId()})]+]*/.render();
+                        });
+                    </script>
+                </div><br/>
+            </div>
+        </div>
+
+        <div th:id="NumberRange+${survey.getId()}" class="htabcontent" style="display: none;">
+            <h3>Number Range Responses</h3>
+            <div th:each="nr,iter : ${numberranges}">
+                <div th:id="nrchart + ${nr.getId()}" style="width: 40%; height: 400px; display: block;">
+                    <script th:inline="javascript">
+                        $(document).ready(function () {
+                            /*[+
+                            let [(nrmap + ${nr.getId()})] = [[${nrmaplist.get(iter.index)}]];
+                            +]*/
+                            /*[+
+                            let [(nrDataPoints + ${nr.getId()})] = [];
+                            +]*/
+                            for (nrm in /*[(nrmap + ${nr.getId()})]*/) {
+                                /*[+[(nrDataPoints + ${nr.getId()})]+]*/.push({
+                                    'label': nrm,
+                                    'y': /*[+[(nrmap + ${nr.getId()})][nrm]+]*/
+                                })
+                            }
+
+                            var /*[+[(rangeGraph + ${nr.getId()})]+]*/ =
+                            new CanvasJS.Chart( /*[[nrchart + ${nr.getId()}]]*/, {
+                                animationEnabled: true,
+                                title: {text: /*[[${nr.getQuestion()}]]*/},
+                                data: [{
+                                    type: "column",
+                                    dataPoints: /*[(nrDataPoints + ${nr.getId()})]*/
+                                }]
+                            })
+
+                                /*[+[(rangeGraph + ${nr.getId()})]+]*/.render();
+                        });
+                    </script>
+                </div><br/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

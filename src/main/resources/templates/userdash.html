@@ -141,6 +141,9 @@
             <p th:id="surveystatus + ${survey.getId}" th:case="true">Survey Status: Active</p>
             <p th:id="surveystatus + ${survey.getId}" th:case="false">Survey Status: Closed</p>
         </div>
+        <a th:href="@{/dashboard/liveview/{id}(id=${survey.getId()})}">
+            <button id="viewlive">Live View</button>
+        </a>
 
         <div>
         <h3>Danger</h3>

@@ -12,6 +12,15 @@ function connect(id) {
     }
 }
 
+function send_update(id)
+{
+    var data = JSON.stringify({
+        'type': "SURVEY_SUBMISSION",
+        'id': id
+    })
+    ws.send(data);
+}
+
 function disconnect() {
     if (ws != null) {
         ws.close();

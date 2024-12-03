@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Live View</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/survey_live.js}"></script>
+    <script type="text/javascript" th:src="@{/js/results.js}"></script>
+    <link th:href="@{/css/userdash.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+<div class="user-info">
+    You are currently logged in as: <span th:text="${username}"></span>.
+    <br>
+    <a href="/dashboard">
+        <button>Dashboard</button>
+    </a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        connect("[[${survey.getId()}]]");
+
+        updateOutput();
+    })
+
+</script>
+    <div class="htab">
+        <button class="htablinks" th:id="OpenEndedTab + ${survey.getId()}" th:onclick="|viewQuestion(event, 'OpenEnded${survey.getId()}')|">Open Ended</button>
+        <button class="htablinks" th:id="MultipleChoiceTab + ${survey.getId()}" th:onclick="|viewQuestion(event, 'MultipleChoice${survey.getId()}')|">Multiple Choice</button>
+        <button class="htablinks" th:id="NumberRangeTab + ${survey.getId()}" th:onclick="|viewQuestion(event, 'NumberRange${survey.getId()}')|">Number Range</button>
+        <button class="htablinks" th:id="SettingsTab + ${survey.getId()}" th:onclick="|viewQuestion(event, 'Settings${survey.getId()}')|">Status</button>
+    </div>
+
+    <div id="survey_questions">
+    </div>
+
+<div th:id="Settings+${survey.getId()}" class="htabcontent">
+    <h3>Status</h3>
+    <div th:switch="${survey.isActive()}">
+        <p th:id="surveystatus + ${survey.getId}" th:case="true">Survey Status: Active</p>
+        <p th:id="surveystatus + ${survey.getId}" th:case="false">Survey Status: Closed</p>
+    </div>
+
+    <div>
+        <h3>Danger</h3>
+        <button id="close" th:onclick="|closeSurvey('${survey.getId()}')|">Close Survey</button>
+    </div>
+</div>
+</body>
+</html>

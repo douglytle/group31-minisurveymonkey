@@ -57,6 +57,15 @@ public class UserAccount {
         return surveys;
     }
 
+    public boolean hasSurvey(Long id){
+        for (Survey survey : surveys) {
+            if (survey.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Long getId() {
         return id;
     }

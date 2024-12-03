@@ -11,10 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -132,4 +129,80 @@ public class UserAccountController {
 
         return "userdash";
     }
+
+    @RequestMapping(value="/dashboard/liveview/{id}/update_live", method=RequestMethod.POST)
+    public String sendHtmlFragment(@PathVariable Long id, Model model, HttpSession session) {
+        model.addAttribute("username", session.getAttribute("username"));
+        Survey survey;
+
+        Optional<Survey> result = surveyRepository.findById(id);
+        if (result.isPresent()) {
+            survey = result.get();
+        }
+        else {
+            return "home";
+        }
+
+        List<NumberRange> numberRanges = survey.getNumberRangeQuestions();
+        List<MultipleChoice> multipleChoices = survey.getMultipleChoiceQuestions();
+        List<OpenEnded> openEndeds = survey.getOpenEndedQuestions();
+        ArrayList<Map<String,Integer>> mcqmaplist = new ArrayList<>();
+
+        for (MultipleChoice mcq : multipleChoices) {
+            Map<String,Integer> mcqmap = new HashMap<>();
+            for (String choice : mcq.getChoices()) {
+                mcqmap.put(choice, Collections.frequency(mcq.getAnswers(), choice));
+            }
+            mcqmaplist.add(mcqmap);
+        }
+
+        ArrayList<Map<String,Integer>> nrmaplist = new ArrayList<>();
+
+        for (NumberRange nr : numberRanges) {
+            HashSet<String> nrAnswers = new HashSet<>(nr.getAnswers());
+            Map<String,Integer> nrmap = new HashMap<>();
+            for (String choice : nrAnswers) {
+                nrmap.put(choice, Collections.frequency(nr.getAnswers(), choice));
+            }
+            nrmaplist.add(nrmap);
+        }
+
+        System.out.println(numberRanges);
+        System.out.println(multipleChoices);
+        System.out.println(openEndeds);
+        System.out.println(mcqmaplist);
+        System.out.println(nrmaplist);
+
+        model.addAttribute("survey", survey);
+        model.addAttribute("numberranges", numberRanges);
+        model.addAttribute("multiplechoices", multipleChoices);
+        model.addAttribute("openendeds", openEndeds);
+        model.addAttribute("mcqmaplist", mcqmaplist);
+        model.addAttribute("nrmaplist", nrmaplist);
+
+        return "fragments/survey_questions_frag.html :: survey_questions";
+    }
+
+    @GetMapping("/dashboard/liveview/{id}")
+    public String viewLiveBoard(@PathVariable Long id, Model model, HttpSession session) {
+        model.addAttribute("username", session.getAttribute("username"));
+
+        UserAccount userAccount = userAccountRepository.findByUsername(session.getAttribute("username").toString());
+
+        if (userAccount.hasSurvey(id)){
+            Survey survey;
+            Optional<Survey> result = surveyRepository.findById(id);
+            if (result.isPresent()) {
+                survey = result.get();
+            }
+            else {
+                return "home";
+            }
+            model.addAttribute("survey", survey);
+            return "survey_live";
+        }
+
+        return "home";
+    }
+
 }

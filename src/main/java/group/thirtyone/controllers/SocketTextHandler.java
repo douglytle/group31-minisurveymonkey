@@ -44,6 +44,8 @@ public class SocketTextHandler extends TextWebSocketHandler {
                 closeSurvey(jsonObject.get("id").toString());
                 msgtoSend = "CLOSE #" + jsonObject.get("id").toString() + "#";
                 break;
+            case "SURVEY_SUBMISSION":
+                msgtoSend = "SUBMITTED #" + jsonObject.get("id").toString() + "#";
             // other cases...
         }
 
