@@ -141,16 +141,19 @@
             <p th:id="surveystatus + ${survey.getId}" th:case="true">Survey Status: Active</p>
             <p th:id="surveystatus + ${survey.getId}" th:case="false">Survey Status: Closed</p>
         </div>
+        <a th:href="@{/dashboard/liveview/{id}(id=${survey.getId()})}">
+            <button id="viewlive">Live View</button>
+        </a>
 
         <div>
         <h3>Danger</h3>
-            <button id="close" th:onclick="|sendData('This is a test message!!', '${survey.getId()}')|">Close Survey</button>
+            <button id="close" th:onclick="|closeSurvey('${survey.getId()}')|">Close Survey</button>
         </div>
     </div>
 </div>
 
 <script th:if="${surveys.size() > 0}">
-    // Get the element with id="defaultOpen" and click on it
+    // Get the element with id="surveyclass(id)" and click on it
     $(document).ready(function(){
         document.getElementById("[[surveyclass + ${surveys.get(0).getId()}]]").click();
     });

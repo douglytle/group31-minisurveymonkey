@@ -10,17 +10,19 @@ function connect(id) {
             location.reload();
         }
     }
-    //setConnected(true);
+}
+
+function send_update(id)
+{
+    var data = JSON.stringify({
+        'type': "SURVEY_SUBMISSION",
+        'id': id
+    })
+    ws.send(data);
 }
 
 function disconnect() {
     if (ws != null) {
         ws.close();
     }
-    //setConnected(false);
-    console.log("Websocket is in disconnected state");
 }
-
-// function helloWorld(message) {
-//     $("#helloworldmessage").append(" " + message + "");
-// }

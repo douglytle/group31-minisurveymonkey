@@ -19,13 +19,11 @@ function connect() {
             updateOutput();
         }
     }
-    //setConnected(true);
 }
 
 function disconnect() {
     if (ws != null) {
         ws.close();
     }
-    //setConnected(false);
     console.log("Websocket is in disconnected state");
 }

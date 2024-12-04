@@ -28,6 +28,7 @@
                 data: formData
             });
             setTimeout(function () {
+                send_update("[[${survey.getId()}]]");
                 window.location.href = baseURL;
             }, 300);
         });
