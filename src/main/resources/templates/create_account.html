@@ -3,27 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Create An Account</title>
+    <link th:href="@{/css/create_account.css}" rel="stylesheet" />
 </head>
 <body>
-<h2>User Account Creation Page</h2>
-<h3>
-    IMPORTANT NOTE: There is absolutely NO security or encryption being used here.
-    Username/password combos are stored in plaintext. Do not use anything you don't want open to the internet.
-</h3>
-<br>
-<p>Already have an account? Log in <a href="/login">here</a>.</p>
-<form method="POST" action="#" th:action="@{/create_account}" th:object="${userAccount}">
-    <fieldset>
-        <legend>Create New User Account</legend>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" th:field="*{username}">
-        <br><br>
-        <label for="password">Password</label>
-        <input type="text" id="password" name="password" th:field="*{password}">
-        <br><br>
-        <button type="submit">Submit</button>
-    </fieldset>
-</form>
-<a href="/">Back to home page</a>
+<div class="container">
+    <h2>User Account Creation Page</h2>
+    <p>Already have an account? Log in <a href="/login">here</a>.</p>
+    <form method="POST" action="#" th:action="@{/create_account}" th:object="${userAccount}">
+        <fieldset>
+            <legend>Create New User Account</legend>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" th:field="*{username}">
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" th:field="*{password}">
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+    <a href="/">Back to home page</a>
+</div>
 </body>
 </html>

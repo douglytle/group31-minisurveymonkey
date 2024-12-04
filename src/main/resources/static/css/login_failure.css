@@ -24,23 +24,36 @@ div.container h2 {
     margin-bottom: 15px;
     color: #e74c3c; /* Red */
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 div.container p {
     margin-bottom: 20px;
     color: #34495e; /* Navy Blue */
+    font-size: 1em;
 }
 
-/* Links */
-a {
+/* Links Container */
+div.actions {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Add spacing between buttons */
+}
+
+/* Buttons */
+a.button {
     display: inline-block;
-    margin-top: 10px;
-    color: #3498db; /* Bright Blue */
+    padding: 10px 20px;
+    background-color: #3498db; /* Bright Blue */
+    color: white;
     text-decoration: none;
     font-weight: bold;
+    border-radius: 5px;
     font-size: 0.9em;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-a:hover {
-    text-decoration: underline;
+a.button:hover {
+    background-color: #2980b9; /* Darker Blue */
 }
