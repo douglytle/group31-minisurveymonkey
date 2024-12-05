@@ -116,3 +116,25 @@ div[id^="mcqchart"] h3, div[id^="nrchart"] h3 {
     color: #2c3e50; /* Dark blue-gray */
     margin-bottom: 10px;
 }
+
+#close {
+    background-color: #920808; /* Dark Red */
+    color: white;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#viewlive {
+    background-color: #0c7ab6; /* Dark Red */
+    color: white;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease-in-out;
+}

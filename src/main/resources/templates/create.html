@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Create Survey</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link th:href="@{/css/create.css}" rel="stylesheet" />
     <script type="text/javascript">
         $(document).ready(function() {
             $(".addMCQuestion").on("click", function () {
@@ -56,13 +57,18 @@
     </script>
 </head>
 <body>
+<div class="user-info">
+    You are currently logged in as: <span th:text="${username}"></span>.
+    <br>
+</div>
+
 <h1>Create Survey</h1>
 
 <form class="createSurvey">
-        <p>Survey Name: <input type="text" name="surveyName"/> </p>
-    <p>Note: Any questions with blank question text will be excluded.</p>
-    <p>Order of questions is ascending, for example 1 will be the first question on the list, 2 will be the second, etc.</p>
-    <p>Multiple questions with the same order will be one after the other at random.</p>
+    <p>Survey Name: <input type="text" name="surveyName"/> </p>
+    <p>Note: Any questions with blank question text will be excluded.<br>
+    Order of questions is ascending, for example 1 will be the first question on the list, 2 will be the second, etc.<br>
+    Multiple questions with the same order will be one after the other at random.</p>
 
         <p>Multiple Choice Questions:</p>
         <ul class="MCList" id="MCList">
@@ -73,13 +79,14 @@
                     <label>Order on page: </label>
                     <input type="number" class="MCOrder" name="MCOrder" value="0"><br>
                     <p>List the choices:</p>
-                    <ul>
+                    <ul class="choices">
                         <li class="choice">
                             <label>Choice: </label>
-                            <input type="text" class="MCChoice" name="MCChoice"><br>
+                            <input type="text" class="MCChoice" name="MCChoice">
                         </li>
+                        <button type="button" class="addChoice" id="addChoice">+</button>
                     </ul>
-                    <button type="button" class="addChoice" id="addChoice">Add choice</button>
+
                 </div>
             </li>
         </ul>
@@ -114,8 +121,11 @@
         </li>
     </ul>
     <button type="button" class="addOEQuestion" id="addOEQuestion">Add Open Ended Question</button>
-    <p><input type="button" value="Submit" class="submit"/></p>
+    <p class="button-cradle"><input type="button" value="Submit" class="submit"/>
+        <a href="/"><button class="back" type="button">Back</button></a>
+    </p>
+
 </form>
-<a href="/"><button>Back</button></a>
+
 </body>
 </html>
