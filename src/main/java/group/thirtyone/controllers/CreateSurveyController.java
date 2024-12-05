@@ -20,7 +20,8 @@ public class CreateSurveyController {
     }
 
     @GetMapping("/create")
-    public String createSurvey(Model model) {
+    public String createSurvey(Model model, HttpSession session) {
+        model.addAttribute("username", session.getAttribute("username"));
         return "create";
     }
 
