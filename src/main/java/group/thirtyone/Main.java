@@ -41,12 +41,6 @@ public class Main {
             Survey survey2 = new Survey();
             survey2.setName("Second Survey of the Night");
 
-            Survey survey3 = new Survey();
-            survey3.setName("Sample survey title 3");
-
-            Survey survey4 = new Survey();
-            survey4.setName("Sample survey title 4");
-
             ArrayList<String> choices = new ArrayList<>();
             choices.add("Choice 1");
             choices.add("Choice 2");
@@ -106,8 +100,6 @@ public class Main {
 
 
             userAccountRepository.save(user1);
-            surveyRepository.save(survey3);
-            surveyRepository.save(survey4);
         };
     }
 

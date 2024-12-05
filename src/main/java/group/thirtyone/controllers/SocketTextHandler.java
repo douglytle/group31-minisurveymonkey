@@ -46,6 +46,9 @@ public class SocketTextHandler extends TextWebSocketHandler {
                 break;
             case "SURVEY_SUBMISSION":
                 msgtoSend = "SUBMITTED #" + jsonObject.get("id").toString() + "#";
+                break;
+            case "SURVEY_CREATED":
+                msgtoSend = "CREATED";
             // other cases...
         }
 
