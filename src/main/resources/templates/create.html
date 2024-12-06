@@ -5,6 +5,7 @@
     <title>Create Survey</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link th:href="@{/css/create.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/create.js}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".addMCQuestion").on("click", function () {
@@ -50,6 +51,7 @@
                     data: formData
                 });
                 setTimeout(function () {
+                    sendCreate();
                     window.location.href = baseURL;
                 }, 300);
             });

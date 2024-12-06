@@ -15,7 +15,7 @@ function connect() {
     var baseURL = window.location.origin
     ws = new WebSocket(baseURL + '/comms/survey-speak');
     ws.onmessage = function(data) {
-        if (data.data.includes("CLOSE")) {
+        if (data.data.includes("CLOSE") || data.data.includes("CREATED")) {
             updateOutput();
         }
     }
